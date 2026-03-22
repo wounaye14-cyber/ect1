@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0058)file:///C:/Users/leuro/Downloads/ect1-revision%20(15).html -->
-<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>ECT1 — Espace révision</title>
 
@@ -12,12 +12,12 @@
 <meta name="apple-mobile-web-app-title" content="ECT1">
 <meta name="description" content="Espace de révision ECT1 — Tâches, fiches, khôlles, DST, notes">
 <meta name="theme-color" content="#1c1917">
-<link rel="manifest" id="pwa-manifest" href="blob:null/9fff8595-29c9-4774-8e2c-3b3cae16a30c">
+<link rel="manifest" id="pwa-manifest">
 
 <!-- PWA Icons (inline SVG as data URI) -->
-<link rel="apple-touch-icon" id="pwa-icon-apple" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICAgIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSIjMWMxOTE3Ii8+CiAgICA8dGV4dCB4PSIyNTYiIHk9IjIwMCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMTYwIiBmb250LXdlaWdodD0iOTAwIgogICAgICBmaWxsPSIjZjhmNmYxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FPC90ZXh0PgogICAgPHRleHQgeD0iMjU2IiB5PSIzNDAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjcyIiBmb250LXdlaWdodD0iNzAwIgogICAgICBmaWxsPSIjYzk0ZjJjIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5DVDE8L3RleHQ+CiAgPC9zdmc+">
-<link rel="icon" type="image/svg+xml" id="pwa-favicon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICAgIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSIjMWMxOTE3Ii8+CiAgICA8dGV4dCB4PSIyNTYiIHk9IjIwMCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMTYwIiBmb250LXdlaWdodD0iOTAwIgogICAgICBmaWxsPSIjZjhmNmYxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5FPC90ZXh0PgogICAgPHRleHQgeD0iMjU2IiB5PSIzNDAiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjcyIiBmb250LXdlaWdodD0iNzAwIgogICAgICBmaWxsPSIjYzk0ZjJjIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5DVDE8L3RleHQ+CiAgPC9zdmc+">
-<link href="./ECT1 — Espace révision_files/css2" rel="stylesheet">
+<link rel="apple-touch-icon" id="pwa-icon-apple">
+<link rel="icon" type="image/svg+xml" id="pwa-favicon">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -123,7 +123,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
 .dtab{font-family:'Syne',sans-serif;font-weight:700;font-size:.74rem;border:1px solid var(--bdr);background:var(--sur);border-radius:6px;padding:.35rem .78rem;cursor:pointer;transition:all .15s;color:var(--mut)}
 .dtab:hover{border-color:var(--txt);color:var(--txt)}
 .dtab.on{background:var(--txt);color:#fff;border-color:var(--txt)}
-.schg{display:grid;grid-template-columns:50px 1fr}
+.schg{display:grid;grid-template-columns:42px 1fr;overflow-x:auto}
 .scht{font-family:'IBM Plex Mono',monospace;font-size:.56rem;color:var(--mut);text-align:right;padding:2px .6rem 0 0;border-right:1px solid var(--bdr);line-height:1}
 .schs{border-bottom:1px solid var(--bdr);min-height:42px;padding:.28rem .6rem;display:flex;flex-direction:column;gap:.2rem}
 .schev{border-radius:5px;padding:.3rem .65rem;font-size:.76rem;font-weight:700;color:#fff;display:inline-block}
@@ -267,6 +267,10 @@ main{padding:2rem 2.5rem;max-width:1000px}
 }
 @media(max-width:768px){
   .app{grid-template-columns:1fr}
+  .schg{font-size:.8rem}
+  .schev{font-size:.7rem;padding:.25rem .5rem}
+  .schkh{font-size:.68rem;padding:.22rem .45rem}
+  .scht{font-size:.55rem;padding-top:4px}
   aside{position:fixed;left:-240px;z-index:200;transition:left .28s;width:230px;height:100vh;top:0}
   aside.open{left:0}
   main{padding:1.1rem}
@@ -296,41 +300,41 @@ main{padding:2rem 2.5rem;max-width:1000px}
 <aside id="sb">
   <div class="brand">
     <div class="brand-n">ECT1</div>
-    <div class="brand-s" id="brand-sub">ECT1 - Espace revision</div>
-    <div class="brand-d" id="ld">22 mars</div>
+    <div class="brand-s" id="brand-sub">Espace révision</div>
+    <div class="brand-d" id="ld"></div>
   </div>
   <nav>
     <div class="nsec">Navigation</div>
-    <button class="nb" onclick="goTo(&#39;dashboard&#39;,this)"><span class="nd" style="background:#f8f6f1"></span>Aujourd'hui</button>
-    <button class="nb on" onclick="goTo(&#39;taches&#39;,this)"><span class="nd" style="background:#9e9387"></span>Tâches</button>
-    <button class="nb" onclick="goTo(&#39;agenda&#39;,this)"><span class="nd" style="background:#9e9387"></span>Agenda</button>
-    <button class="nb" onclick="goTo(&#39;fiches&#39;,this)"><span class="nd" style="background:#9e9387"></span>Fiches</button>
-    <button class="nb" onclick="goTo(&#39;cours&#39;,this)"><span class="nd" style="background:#0891b2"></span>Cours</button>
-    <button class="nb" onclick="goTo(&#39;notes&#39;,this)"><span class="nd" style="background:#6366f1"></span>Notes</button>
-    <button class="nb" onclick="goTo(&#39;reminders&#39;,this)"><span class="nd" style="background:#ec4899"></span>🔔 Rappels</button>
-    <button class="nb" onclick="goTo(&#39;controls&#39;,this)"><span class="nd" style="background:#f59e0b"></span>Contrôles</button>
-    <button class="nb" onclick="goTo(&#39;pomodoro&#39;,this)"><span class="nd" style="background:#9e9387"></span>Pomodoro</button>
-    <button class="nb" onclick="goTo(&#39;kholles&#39;,this)"><span class="nd" style="background:#e07b39"></span>Khôlles</button>
-    <button class="nb" onclick="goTo(&#39;dst&#39;,this)"><span class="nd" style="background:#c03a5a"></span>DST</button>
+    <button class="nb on"  onclick="goTo('dashboard',this)"><span class="nd" style="background:#f8f6f1"></span>Aujourd'hui</button>
+    <button class="nb" onclick="goTo('taches',this)"><span class="nd" style="background:#9e9387"></span>Tâches</button>
+    <button class="nb" onclick="goTo('agenda',this)"><span class="nd" style="background:#9e9387"></span>Agenda</button>
+    <button class="nb" onclick="goTo('fiches',this)"><span class="nd" style="background:#9e9387"></span>Fiches</button>
+    <button class="nb" onclick="goTo('cours',this)"><span class="nd" style="background:#0891b2"></span>Cours</button>
+    <button class="nb" onclick="goTo('notes',this)"><span class="nd" style="background:#6366f1"></span>Notes</button>
+    <button class="nb" onclick="goTo('reminders',this)"><span class="nd" style="background:#ec4899"></span>🔔 Rappels</button>
+    <button class="nb" onclick="goTo('controls',this)"><span class="nd" style="background:#f59e0b"></span>Contrôles</button>
+    <button class="nb" onclick="goTo('pomodoro',this)"><span class="nd" style="background:#9e9387"></span>Pomodoro</button>
+    <button class="nb" onclick="goTo('kholles',this)"><span class="nd" style="background:#e07b39"></span>Khôlles</button>
+    <button class="nb" onclick="goTo('dst',this)"><span class="nd" style="background:#c03a5a"></span>DST</button>
     <div class="nsec">Fiches par matière</div>
-    <button class="nb" onclick="gotoFiches(&#39;maths&#39;,this)"><span class="nd" style="background:#2e5fa3"></span>Maths</button>
-    <button class="nb" onclick="gotoFiches(&#39;droit&#39;,this)"><span class="nd" style="background:#d64f3a"></span>Droit / Éco</button>
-    <button class="nb" onclick="gotoFiches(&#39;management&#39;,this)"><span class="nd" style="background:#3a7d5a"></span>Management</button>
-    <button class="nb" onclick="gotoFiches(&#39;anglais&#39;,this)"><span class="nd" style="background:#c08a2a"></span>Anglais</button>
-    <button class="nb" onclick="gotoFiches(&#39;culture&#39;,this)"><span class="nd" style="background:#6b4f8a"></span>Culture G.</button>
-    <button class="nb" onclick="gotoFiches(&#39;philo&#39;,this)"><span class="nd" style="background:#78716c"></span>Philo</button>
-    <button class="nb" onclick="gotoFiches(&#39;allemand&#39;,this)"><span class="nd" style="background:#8a5a2a"></span>Allemand</button>
-    <button class="nb" onclick="goTo(&#39;stats&#39;,this)"><span class="nd" style="background:#8b5cf6"></span>📊 Statistiques</button>
-    <button class="nb" onclick="goTo(&#39;calendrier&#39;,this)"><span class="nd" style="background:#06b6d4"></span>📅 Calendrier</button>
-    <button class="nb" onclick="goTo(&#39;anki&#39;,this)"><span class="nd" style="background:#f59e0b"></span>🃏 Flashcards</button>
-    <button class="nb" onclick="goTo(&#39;bienetre&#39;,this)"><span class="nd" style="background:#ec4899"></span>😴 Bien-être</button>
-    <button class="nb settings-nb" onclick="goTo(&#39;sync&#39;,this)"><span class="nd" style="background:#0891b2"></span>☁️ Synchronisation</button>
-    <button class="nb settings-nb" onclick="goTo(&#39;settings&#39;,this)"><span class="nd" style="background:#f59e0b"></span>⚙️ Paramètres</button>
+    <button class="nb" onclick="gotoFiches('maths',this)"><span class="nd" style="background:#2e5fa3"></span>Maths</button>
+    <button class="nb" onclick="gotoFiches('droit',this)"><span class="nd" style="background:#d64f3a"></span>Droit / Éco</button>
+    <button class="nb" onclick="gotoFiches('management',this)"><span class="nd" style="background:#3a7d5a"></span>Management</button>
+    <button class="nb" onclick="gotoFiches('anglais',this)"><span class="nd" style="background:#c08a2a"></span>Anglais</button>
+    <button class="nb" onclick="gotoFiches('culture',this)"><span class="nd" style="background:#6b4f8a"></span>Culture G.</button>
+    <button class="nb" onclick="gotoFiches('philo',this)"><span class="nd" style="background:#78716c"></span>Philo</button>
+    <button class="nb" onclick="gotoFiches('allemand',this)"><span class="nd" style="background:#8a5a2a"></span>Allemand</button>
+    <button class="nb" onclick="goTo('stats',this)"><span class="nd" style="background:#8b5cf6"></span>📊 Statistiques</button>
+    <button class="nb" onclick="goTo('calendrier',this)"><span class="nd" style="background:#06b6d4"></span>📅 Calendrier</button>
+    <button class="nb" onclick="goTo('anki',this)"><span class="nd" style="background:#f59e0b"></span>🃏 Flashcards</button>
+    <button class="nb" onclick="goTo('bienetre',this)"><span class="nd" style="background:#ec4899"></span>😴 Bien-être</button>
+    <button class="nb settings-nb" onclick="goTo('sync',this)"><span class="nd" style="background:#0891b2"></span>☁️ Synchronisation</button>
+    <button class="nb settings-nb" onclick="goTo('settings',this)"><span class="nd" style="background:#f59e0b"></span>⚙️ Paramètres</button>
   </nav>
   <div class="sf">
     <div class="sfr"><span class="sfl">Tâches faites</span><span class="sfv" id="sf-done">0</span></div>
     <div class="sfr"><span class="sfl">Pomodoros</span><span class="sfv" id="sf-pom">0</span></div>
-    <div class="sfr"><span class="sfl">Fiches</span><span class="sfv" id="sf-fiches">3</span></div>
+    <div class="sfr"><span class="sfl">Fiches</span><span class="sfv" id="sf-fiches">0</span></div>
     <div class="sfr"><span class="sfl">Contrôles</span><span class="sfv" id="sf-ctrl">0</span></div>
   </div>
 </aside>
@@ -338,11 +342,11 @@ main{padding:2rem 2.5rem;max-width:1000px}
 <main>
 
 <!-- DASHBOARD -->
-<div class="page" id="page-dashboard">
+<div class="page on" id="page-dashboard">
   <div class="tblk">
-    <div class="tblk-g" id="greeting">Bon apres-midi Nathan 👋</div>
-    <div class="tblk-s" id="today-sub">DIMANCHE 22 MARS 2026</div>
-    <div class="tblk-c" id="today-cours"><div class="cpill"><div class="cdot" style="background:#d64f3a"></div>Éco/Droit<span class="ctime">8h30–10h30</span></div><div class="cpill"><div class="cdot" style="background:#6b4f8a"></div>Culture G.<span class="ctime">10h35–11h30</span></div><div class="cpill"><div class="cdot" style="background:#c08a2a"></div>Anglais<span class="ctime">13h30–15h30</span></div><div class="cpill"><div class="cdot" style="background:#78716c"></div>Philo<span class="ctime">15h35–17h30</span></div></div>
+    <div class="tblk-g" id="greeting">Bonjour 👋</div>
+    <div class="tblk-s" id="today-sub"></div>
+    <div class="tblk-c" id="today-cours"></div>
   </div>
   <div class="g2">
     <div class="smc"><div class="smcn" id="d-tasks">0/0</div><div class="smcl">Tâches aujourd'hui</div></div>
@@ -351,30 +355,30 @@ main{padding:2rem 2.5rem;max-width:1000px}
   <div class="card" style="margin-bottom:.9rem">
     <div class="clbl">Tâches du jour</div>
     <div class="irow">
-      <input class="inp" id="d-inp" placeholder="Nouvelle tâche rapide…" onkeydown="if(event.key===&#39;Enter&#39;)addDashTask()">
+      <input class="inp" id="d-inp" placeholder="Nouvelle tâche rapide…" onkeydown="if(event.key==='Enter')addDashTask()">
       <select class="sel" id="d-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
       <button class="btn btn-dk" onclick="addDashTask()">+</button>
     </div>
-    <ul class="tlist" id="d-list"><li style="padding:.9rem;color:var(--mut);font-size:.82rem">Aucune tache pour aujourd'hui</li></ul>
+    <ul class="tlist" id="d-list"></ul>
   </div>
   <div class="card">
     <div class="clbl">Progression semaine</div>
-    <div class="wprog" id="wprog"><div class="wpd"><div class="wpdl">Lun</div><div class="wpdb" style=""><div class="wpdf" style="height:0%;background:#3a7d5a"></div></div><div class="wpdc" style="color:var(--mut)">0/-</div></div><div class="wpd"><div class="wpdl">Mar</div><div class="wpdb" style=""><div class="wpdf" style="height:0%;background:#3a7d5a"></div></div><div class="wpdc" style="color:var(--mut)">0/-</div></div><div class="wpd"><div class="wpdl">Mer</div><div class="wpdb" style=""><div class="wpdf" style="height:0%;background:#3a7d5a"></div></div><div class="wpdc" style="color:var(--mut)">0/-</div></div><div class="wpd"><div class="wpdl">Jeu</div><div class="wpdb" style=""><div class="wpdf" style="height:0%;background:#3a7d5a"></div></div><div class="wpdc" style="color:var(--mut)">0/-</div></div><div class="wpd"><div class="wpdl">Ven</div><div class="wpdb" style="border:2px solid var(--txt)"><div class="wpdf" style="height:0%;background:var(--txt)"></div></div><div class="wpdc" style="color:var(--txt)">0/-</div></div></div>
+    <div class="wprog" id="wprog"></div>
   </div>
 </div>
 
 <!-- TACHES -->
-<div class="page on" id="page-taches">
-  <div class="ph"><div class="ph-t">Tâches</div><div class="ph-m" id="wk-range">16 - 22 mars</div></div>
-  <div class="wknav" id="wknav"><button class="wdb" onclick="selWD(0)"><span class="wdbd">L</span><span class="wdbn">16</span><div class="wdbdot"></div></button><button class="wdb" onclick="selWD(1)"><span class="wdbd">M</span><span class="wdbn">17</span><div class="wdbdot"></div></button><button class="wdb" onclick="selWD(2)"><span class="wdbd">M</span><span class="wdbn">18</span><div class="wdbdot"></div></button><button class="wdb" onclick="selWD(3)"><span class="wdbd">J</span><span class="wdbn">19</span><div class="wdbdot"></div></button><button class="wdb on" onclick="selWD(4)"><span class="wdbd">V</span><span class="wdbn">20</span><div class="wdbdot"></div></button><button class="wdb" onclick="selWD(5)"><span class="wdbd">S</span><span class="wdbn">21</span><div class="wdbdot"></div></button><button class="wdb" onclick="selWD(6)"><span class="wdbd">D</span><span class="wdbn">22</span><div class="wdbdot"></div></button></div>
+<div class="page" id="page-taches">
+  <div class="ph"><div class="ph-t">Tâches</div><div class="ph-m" id="wk-range"></div></div>
+  <div class="wknav" id="wknav"></div>
   <div class="card" style="margin-bottom:.9rem">
     <div class="irow">
-      <input class="inp" id="t-inp" placeholder="Nouvelle tâche…" onkeydown="if(event.key===&#39;Enter&#39;)addFullTask()">
+      <input class="inp" id="t-inp" placeholder="Nouvelle tâche…" onkeydown="if(event.key==='Enter')addFullTask()">
       <select class="sel" id="t-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
       <button class="btn btn-dk" onclick="addFullTask()">Ajouter</button>
     </div>
   </div>
-  <ul class="tlist" id="t-list"><li style="padding:1.5rem;text-align:center;color:var(--mut);font-size:.82rem">Aucune tache ce jour ✏️</li></ul>
+  <ul class="tlist" id="t-list"></ul>
 </div>
 
 <!-- AGENDA -->
@@ -382,7 +386,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
   <div class="ph">
     <div class="ph-t">Agenda</div>
     <div style="display:flex;gap:.38rem;flex-wrap:wrap">
-      <button class="btn btn-gh btn-sm" onclick="openOv(&#39;ov-ev&#39;)">+ Cours</button>
+      <button class="btn btn-gh btn-sm" onclick="openOv('ov-ev')">+ Cours</button>
       <button class="btn btn-sm btn-red" onclick="resetAgenda()">↺ Reset</button>
     </div>
   </div>
@@ -390,13 +394,13 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div style="display:flex;align-items:center;gap:.35rem;font-size:.74rem"><div style="width:10px;height:10px;border-radius:2px;background:#2e5fa3"></div>Cours</div>
     <div style="display:flex;align-items:center;gap:.35rem;font-size:.74rem"><div style="width:10px;height:10px;border-radius:2px;border:1.5px dashed #e07b39;background:rgba(224,123,57,.2)"></div>Khôlle</div>
   </div>
-  <div class="dtabs" id="dtabs"><button class="dtab on" onclick="selDay(0)">Lundi</button><button class="dtab" onclick="selDay(1)">Mardi</button><button class="dtab" onclick="selDay(2)">Mercredi</button><button class="dtab" onclick="selDay(3)">Jeudi</button><button class="dtab" onclick="selDay(4)">Vendredi</button><button class="dtab" onclick="selDay(5)">Samedi</button></div>
-  <div class="card"><div class="schg" id="schg"><div class="scht">8h</div><div class="schs"><div class="schev" style="background:#2e5fa3">Maths<div class="schevt">8h30–10h25</div></div></div><div class="scht">9h</div><div class="schs"></div><div class="scht">10h</div><div class="schs"><div class="schev" style="background:#d64f3a">Droit/Éco<div class="schevt">10h35–12h25</div></div></div><div class="scht">11h</div><div class="schs"></div><div class="scht">12h</div><div class="schs"></div><div class="scht">13h</div><div class="schs"><div class="schev" style="background:#3a7d5a">Management<div class="schevt">13h30–15h30</div></div></div><div class="scht">14h</div><div class="schs"></div><div class="scht">15h</div><div class="schs"><div class="schev" style="background:#d64f3a">Éco/Droit<div class="schevt">15h35–17h30</div></div></div><div class="scht">16h</div><div class="schs"></div><div class="scht">17h</div><div class="schs"></div><div class="scht">18h</div><div class="schs"></div></div></div>
+  <div class="dtabs" id="dtabs"></div>
+  <div class="card"><div class="schg" id="schg"></div></div>
 </div>
 
 <!-- FICHES -->
 <div class="page" id="page-fiches">
-  <div class="ph"><div class="ph-t">Fiches</div><button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-fiche&#39;)">+ Fiche</button></div>
+  <div class="ph"><div class="ph-t">Fiches</div><button class="btn btn-dk btn-sm" onclick="openOv('ov-fiche')">+ Fiche</button></div>
   <div class="fltrow" id="fltrow"></div>
   <div class="fg" id="fg"></div>
 </div>
@@ -405,28 +409,28 @@ main{padding:2rem 2.5rem;max-width:1000px}
 <div class="page" id="page-cours">
   <div class="ph">
     <div class="ph-t">Cours</div>
-    <button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-cours&#39;)">+ Ajouter un cours</button>
+    <button class="btn btn-dk btn-sm" onclick="openOv('ov-cours')">+ Ajouter un cours</button>
   </div>
   <div id="cours-viewer-section" style="display:none">
     <div class="cours-viewer" id="cours-viewer">
       <div class="cours-viewer-header">
         <div>
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.2rem" id="cv-mat"></div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.2rem" id="cv-mat"></div>
           <div style="font-size:1.2rem;font-weight:800;letter-spacing:-.3px" id="cv-title"></div>
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.6rem;color:var(--mut);margin-top:.2rem" id="cv-meta"></div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut);margin-top:.2rem" id="cv-meta"></div>
         </div>
         <div style="display:flex;gap:.38rem;margin-left:auto;flex-wrap:wrap">
-          <button class="btn btn-gh btn-sm" onclick="genFromCours(&#39;flashcards&#39;)">⚡ Flashcards</button>
-          <button class="btn btn-gh btn-sm" onclick="genFromCours(&#39;fiche&#39;)">📋 Fiche</button>
-          <button class="btn btn-gh btn-sm" onclick="genFromCours(&#39;programme&#39;)">📅 Programme</button>
-          <button class="btn btn-gh btn-sm" onclick="genFromCours(&#39;qcm&#39;)">❓ QCM</button>
+          <button class="btn btn-gh btn-sm" onclick="genFromCours('flashcards')">⚡ Flashcards</button>
+          <button class="btn btn-gh btn-sm" onclick="genFromCours('fiche')">📋 Fiche</button>
+          <button class="btn btn-gh btn-sm" onclick="genFromCours('programme')">📅 Programme</button>
+          <button class="btn btn-gh btn-sm" onclick="genFromCours('qcm')">❓ QCM</button>
           <button class="btn btn-sm btn-red" onclick="closeCoursViewer()">✕ Fermer</button>
         </div>
       </div>
       <div class="cours-viewer-body" id="cv-body"></div>
     </div>
     <div id="ia-loading" style="display:none;text-align:center;padding:1.5rem">
-      <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.7rem;color:var(--mut);letter-spacing:1px" id="ia-ltxt">Génération…</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--mut);letter-spacing:1px" id="ia-ltxt">Génération…</div>
       <div style="margin:1rem auto 0;height:3px;background:var(--bdr);border-radius:3px;overflow:hidden;max-width:280px"><div id="ia-bar" style="height:100%;background:var(--txt);width:0%;transition:width .4s ease;border-radius:3px"></div></div>
     </div>
     <div id="ia-output" style="margin-top:1rem"></div>
@@ -438,7 +442,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
 <div class="page" id="page-controls">
   <div class="ph">
     <div class="ph-t">Contrôles</div>
-    <button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-ctrl&#39;)">+ Contrôle</button>
+    <button class="btn btn-dk btn-sm" onclick="openOv('ov-ctrl')">+ Contrôle</button>
   </div>
   <div class="controls-grid" id="ctrl-grid"></div>
   <div class="card" style="margin-top:1.25rem">
@@ -454,8 +458,8 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="pomw">
       <div class="pomring">
         <svg width="175" height="175" viewBox="0 0 175 175">
-          <circle class="prcbg" cx="87.5" cy="87.5" r="78"></circle>
-          <circle class="prcf" id="prc" cx="87.5" cy="87.5" r="78" stroke-dasharray="490" stroke-dashoffset="0"></circle>
+          <circle class="prcbg" cx="87.5" cy="87.5" r="78"/>
+          <circle class="prcf" id="prc" cx="87.5" cy="87.5" r="78" stroke-dasharray="490" stroke-dashoffset="0"/>
         </svg>
         <div class="pomin">
           <div class="pomt" id="pom-t">25:00</div>
@@ -474,14 +478,14 @@ main{padding:2rem 2.5rem;max-width:1000px}
 
 <!-- KHOLLES -->
 <div class="page" id="page-kholles">
-  <div class="ph"><div class="ph-t">Khôlles</div><button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-kh&#39;)">+ Khôlle</button></div>
+  <div class="ph"><div class="ph-t">Khôlles</div><button class="btn btn-dk btn-sm" onclick="openOv('ov-kh')">+ Khôlle</button></div>
   <div id="kh-banner"></div>
   <div id="kh-list"></div>
 </div>
 
 <!-- DST -->
 <div class="page" id="page-dst">
-  <div class="ph"><div class="ph-t">DST</div><button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-dst&#39;)">+ DST</button></div>
+  <div class="ph"><div class="ph-t">DST</div><button class="btn btn-dk btn-sm" onclick="openOv('ov-dst')">+ DST</button></div>
   <div id="dst-banner"></div>
   <div id="dst-list"></div>
 </div>
@@ -496,6 +500,10 @@ main{padding:2rem 2.5rem;max-width:1000px}
       <div class="sf2"><label>Classe</label><input id="s-classe" value="ECT1"></div>
       <div class="sf2"><label>Lycée</label><input id="s-lycee" placeholder="Nom du lycée"></div>
       <div class="sf2"><label>Année</label><input id="s-annee" value="2025-2026"></div>
+    </div>
+    <div class="sgrid" style="margin-top:.75rem">
+      <div class="sf2"><label>Durée Pomodoro (min)</label><input id="s-pom-dur" type="number" value="25" min="5" max="60"></div>
+      <div class="sf2"><label>Durée pause courte (min)</label><input id="s-pause-dur" type="number" value="5" min="1" max="30"></div>
     </div>
     <button class="btn btn-dk btn-sm" onclick="saveProfile()" style="margin-top:.5rem">Sauvegarder</button>
   </div>
@@ -517,7 +525,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="sadd">
       <div class="sf2"><label>Matière</label><select class="sel" id="s-dst-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
       <div class="sf2"><label>Date</label><input class="inp" type="date" id="s-dst-date"></div>
-      <div class="sf2"><label>Durée</label><select class="sel" id="s-dst-dur" style="width:100%"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected="">4h</option></select></div>
+      <div class="sf2"><label>Durée</label><select class="sel" id="s-dst-dur" style="width:100%"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected>4h</option></select></div>
       <div class="sf2"><label>Type</label><select class="sel" id="s-dst-type" style="width:100%"><option value="dst">DST</option><option value="oral">Oral blanc</option><option value="cb">CB</option></select></div>
       <div class="sf2"><label>Notes</label><input class="inp" id="s-dst-notes" placeholder="Leçons…"></div>
       <button class="btn btn-dk btn-sm" onclick="sAddDst()" style="align-self:flex-end">+</button>
@@ -539,10 +547,10 @@ main{padding:2rem 2.5rem;max-width:1000px}
   <div class="card" style="border-color:rgba(214,79,58,.2)">
     <div class="clbl" style="color:var(--droit)">⚠️ Réinitialisation</div>
     <div style="display:flex;gap:.4rem;flex-wrap:wrap">
-      <button class="btn btn-sm btn-red" onclick="confirmReset(&#39;agenda&#39;)">Reset agenda</button>
-      <button class="btn btn-sm btn-red" onclick="confirmReset(&#39;dst&#39;)">Reset DST</button>
-      <button class="btn btn-sm btn-red" onclick="confirmReset(&#39;kholles&#39;)">Reset khôlles</button>
-      <button class="btn btn-sm btn-red" onclick="confirmReset(&#39;all&#39;)">Tout effacer</button>
+      <button class="btn btn-sm btn-red" onclick="confirmReset('agenda')">Reset agenda</button>
+      <button class="btn btn-sm btn-red" onclick="confirmReset('dst')">Reset DST</button>
+      <button class="btn btn-sm btn-red" onclick="confirmReset('kholles')">Reset khôlles</button>
+      <button class="btn btn-sm btn-red" onclick="confirmReset('all')">Tout effacer</button>
     </div>
     <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--bdr)">
       <div class="clbl" style="color:var(--cyan)">☁️ Synchronisation cloud (ordi ↔ téléphone)</div>
@@ -557,9 +565,9 @@ main{padding:2rem 2.5rem;max-width:1000px}
           Suis ces étapes une seule fois :
         </p>
         <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 1 — Crée ton projet Supabase</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 1 — Crée ton projet Supabase</div>
           <ol style="font-size:.8rem;line-height:2;color:var(--mut);padding-left:1.2rem">
-            <li>Va sur <a href="https://supabase.com/" target="_blank" style="color:var(--cyan)">supabase.com</a> et crée un compte gratuit</li>
+            <li>Va sur <a href="https://supabase.com" target="_blank" style="color:var(--cyan)">supabase.com</a> et crée un compte gratuit</li>
             <li>Crée un nouveau projet (nom au choix, ex: "ect1")</li>
             <li>Dans ton projet, va dans <strong style="color:var(--txt)">SQL Editor</strong></li>
             <li>Colle et exécute ce code SQL :</li>
@@ -573,7 +581,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
 );</pre>
         </div>
         <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 2 — Récupère tes clés</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 2 — Récupère tes clés</div>
           <ol style="font-size:.8rem;line-height:2;color:var(--mut);padding-left:1.2rem">
             <li>Dans Supabase, va dans <strong style="color:var(--txt)">Settings → API</strong></li>
             <li>Copie l'<strong style="color:var(--txt)">URL du projet</strong> (ex: https://xxxxx.supabase.co)</li>
@@ -581,7 +589,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
           </ol>
         </div>
         <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 3 — Connecte ici</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;color:var(--txt);margin-bottom:.75rem">Étape 3 — Connecte ici</div>
           <div class="sf2" style="margin-bottom:.75rem"><label>URL Supabase</label><input id="sb-url-inp" placeholder="https://xxxxx.supabase.co"></div>
           <div class="sf2" style="margin-bottom:.75rem"><label>Clé anon public</label><input id="sb-key-inp" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."></div>
           <div class="sf2" style="margin-bottom:.75rem"><label>Ton identifiant (même sur tous tes appareils)</label><input id="sb-uid-inp" placeholder="ex: mon-prenom-ect1" value="user1"></div>
@@ -628,7 +636,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
       <div style="font-weight:700;font-size:.85rem;margin-bottom:.5rem">Étape 1 — Crée la table Supabase</div>
       <p style="font-size:.8rem;color:var(--mut);margin-bottom:.6rem;line-height:1.6">Dans ton projet Supabase → SQL Editor → New query → colle ce code → Run :</p>
-      <div style="background:#1c1917;color:#a3e635;padding:.85rem 1rem;border-radius:6px;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.72rem;line-height:1.7;user-select:all;cursor:copy" onclick="copySQL(this)">
+      <div style="background:#1c1917;color:#a3e635;padding:.85rem 1rem;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;line-height:1.7;user-select:all;cursor:copy" onclick="copySQL(this)">
 CREATE TABLE IF NOT EXISTS ect_data (<br>
 &nbsp;&nbsp;user_id TEXT NOT NULL,<br>
 &nbsp;&nbsp;key TEXT NOT NULL,<br>
@@ -649,15 +657,15 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
       <div style="font-weight:700;font-size:.85rem;margin-bottom:.75rem">Étape 3 — Connecte ici</div>
       <div class="sf2" style="margin-bottom:.75rem">
         <label>URL Supabase</label>
-        <input id="sync-url" placeholder="https://xxxxx.supabase.co" style="width:100%;font-family:&#39;Syne&#39;,sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
+        <input id="sync-url" placeholder="https://xxxxx.supabase.co" style="width:100%;font-family:'Syne',sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
       </div>
       <div class="sf2" style="margin-bottom:.75rem">
         <label>Clé anon public</label>
-        <input id="sync-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." style="width:100%;font-family:&#39;Syne&#39;,sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
+        <input id="sync-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." style="width:100%;font-family:'Syne',sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
       </div>
       <div class="sf2" style="margin-bottom:.75rem">
         <label>Ton identifiant (même sur tous tes appareils !)</label>
-        <input id="sync-uid" placeholder="ex: ect1-moi" value="user1" style="width:100%;font-family:&#39;Syne&#39;,sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
+        <input id="sync-uid" placeholder="ex: ect1-moi" value="user1" style="width:100%;font-family:'Syne',sans-serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.55rem .8rem;background:var(--sur);color:var(--txt);outline:none">
       </div>
       <button class="btn btn-dk" onclick="saveCloudConfig2()" style="width:100%;padding:.75rem">🔗 Connecter et synchroniser</button>
     </div>
@@ -702,7 +710,7 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
     <!-- Editor -->
     <div class="card" id="notes-editor-card">
       <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.9rem;flex-wrap:wrap">
-        <input id="note-title-inp" placeholder="Titre de la note…" style="flex:1;font-family:&#39;Syne&#39;,sans-serif;font-size:1rem;font-weight:700;border:none;outline:none;background:transparent;color:var(--txt);min-width:0">
+        <input id="note-title-inp" placeholder="Titre de la note…" style="flex:1;font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;border:none;outline:none;background:transparent;color:var(--txt);min-width:0">
         <select id="note-mat-sel" class="sel" style="font-size:.74rem">
           <option value="maths">Maths</option>
           <option value="droit">Droit/Éco</option>
@@ -716,12 +724,11 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
         <button class="btn btn-dk btn-sm" onclick="saveNote()">💾 Sauvegarder</button>
         <button class="btn btn-sm btn-red" id="note-del-btn" onclick="deleteNote()" style="display:none">Supprimer</button>
       </div>
-      <textarea id="note-editor" placeholder="Commence à écrire tes notes ici…
-
-Formules, définitions, raisonnements, méthodes, citations…" style="width:100%;min-height:400px;font-family:&#39;Lora&#39;,serif;font-size:.9rem;line-height:1.9;border:none;outline:none;background:transparent;resize:vertical;color:var(--txt)"></textarea>
+      <textarea id="note-editor" placeholder="Commence à écrire tes notes ici…&#10;&#10;Formules, définitions, raisonnements, méthodes, citations…"
+        style="width:100%;min-height:400px;font-family:'Lora',serif;font-size:.9rem;line-height:1.9;border:none;outline:none;background:transparent;resize:vertical;color:var(--txt)"></textarea>
     </div>
   </div>
-  <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;color:var(--mut);margin-top:.5rem;text-align:right" id="note-autosave-status"></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--mut);margin-top:.5rem;text-align:right" id="note-autosave-status"></div>
 </div>
 
 <!-- ═══ STATISTIQUES ═══ -->
@@ -732,7 +739,7 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
   <div class="card" style="margin-bottom:1rem">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
       <div class="clbl" style="margin:0">🎯 Objectifs hebdomadaires</div>
-      <button class="btn btn-gh btn-sm" onclick="openOv(&#39;ov-objectifs&#39;)">Modifier</button>
+      <button class="btn btn-gh btn-sm" onclick="openOv('ov-objectifs')">Modifier</button>
     </div>
     <div id="objectifs-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem"></div>
   </div>
@@ -781,13 +788,13 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
   <!-- Grille calendrier -->
   <div class="card" style="padding:0;overflow:hidden">
     <div style="display:grid;grid-template-columns:repeat(7,1fr);background:var(--txt)">
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Lun</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Mar</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Mer</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Jeu</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Ven</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Sam</div>
-      <div style="padding:.6rem;text-align:center;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Dim</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Lun</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Mar</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Mer</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Jeu</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Ven</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Sam</div>
+      <div style="padding:.6rem;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:rgba(248,246,241,.5)">Dim</div>
     </div>
     <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr)"></div>
   </div>
@@ -797,13 +804,13 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
 <div class="page" id="page-anki">
   <div class="ph">
     <div class="ph-t">🃏 Flashcards</div>
-    <button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-new-fc&#39;)">+ Carte</button>
+    <button class="btn btn-dk btn-sm" onclick="openOv('ov-new-fc')">+ Carte</button>
   </div>
 
   <!-- Mode révision -->
   <div id="anki-review" style="display:none">
     <div style="text-align:center;margin-bottom:1rem">
-      <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.62rem;color:var(--mut);margin-bottom:.4rem" id="anki-progress-lbl">0 cartes restantes</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--mut);margin-bottom:.4rem" id="anki-progress-lbl">0 cartes restantes</div>
       <div style="height:4px;background:var(--bdr);border-radius:4px;overflow:hidden;max-width:400px;margin:0 auto .75rem">
         <div id="anki-progress-bar" style="height:100%;background:var(--management);border-radius:4px;transition:width .4s ease;width:0%"></div>
       </div>
@@ -811,12 +818,12 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
     <div style="perspective:1000px;max-width:520px;margin:0 auto 1.25rem">
       <div id="anki-card" onclick="flipAnkiCard()" style="position:relative;min-height:200px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer;border-radius:12px">
         <div id="anki-front" style="position:absolute;inset:0;backface-visibility:hidden;background:var(--txt);color:#fff;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.55rem;opacity:.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Question — appuie pour retourner</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;opacity:.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Question — appuie pour retourner</div>
           <div id="anki-q" style="font-size:1rem;font-weight:700;line-height:1.5"></div>
-          <div id="anki-mat-badge" style="margin-top:1rem;font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.6rem;padding:.2rem .6rem;border-radius:4px;opacity:.7"></div>
+          <div id="anki-mat-badge" style="margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;padding:.2rem .6rem;border-radius:4px;opacity:.7"></div>
         </div>
         <div id="anki-back" style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);background:var(--sur);border:2px solid var(--bdr);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
-          <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Réponse</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Réponse</div>
           <div id="anki-a" style="font-size:.95rem;line-height:1.6;color:var(--txt)"></div>
         </div>
       </div>
@@ -849,39 +856,39 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
     <div class="clbl">Journal du jour</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem">
       <div>
-        <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">😴 Sommeil</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">😴 Sommeil</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap">
-          <button class="bien-btn" onclick="logBien(&#39;sleep&#39;,5)" data-val="5">5h</button>
-          <button class="bien-btn" onclick="logBien(&#39;sleep&#39;,6)" data-val="6">6h</button>
-          <button class="bien-btn" onclick="logBien(&#39;sleep&#39;,7)" data-val="7">7h</button>
-          <button class="bien-btn" onclick="logBien(&#39;sleep&#39;,8)" data-val="8">8h</button>
-          <button class="bien-btn" onclick="logBien(&#39;sleep&#39;,9)" data-val="9">9h+</button>
+          <button class="bien-btn" onclick="logBien('sleep',5)" data-val="5">5h</button>
+          <button class="bien-btn" onclick="logBien('sleep',6)" data-val="6">6h</button>
+          <button class="bien-btn" onclick="logBien('sleep',7)" data-val="7">7h</button>
+          <button class="bien-btn" onclick="logBien('sleep',8)" data-val="8">8h</button>
+          <button class="bien-btn" onclick="logBien('sleep',9)" data-val="9">9h+</button>
         </div>
       </div>
       <div>
-        <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">😊 Humeur</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">😊 Humeur</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap">
-          <button class="bien-btn" onclick="logBien(&#39;mood&#39;,1)" data-val="1">😞</button>
-          <button class="bien-btn" onclick="logBien(&#39;mood&#39;,2)" data-val="2">😐</button>
-          <button class="bien-btn" onclick="logBien(&#39;mood&#39;,3)" data-val="3">🙂</button>
-          <button class="bien-btn" onclick="logBien(&#39;mood&#39;,4)" data-val="4">😊</button>
-          <button class="bien-btn" onclick="logBien(&#39;mood&#39;,5)" data-val="5">🤩</button>
+          <button class="bien-btn" onclick="logBien('mood',1)" data-val="1">😞</button>
+          <button class="bien-btn" onclick="logBien('mood',2)" data-val="2">😐</button>
+          <button class="bien-btn" onclick="logBien('mood',3)" data-val="3">🙂</button>
+          <button class="bien-btn" onclick="logBien('mood',4)" data-val="4">😊</button>
+          <button class="bien-btn" onclick="logBien('mood',5)" data-val="5">🤩</button>
         </div>
       </div>
       <div>
-        <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">🔥 Stress</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.5rem">🔥 Stress</div>
         <div style="display:flex;gap:.3rem;flex-wrap:wrap">
-          <button class="bien-btn" onclick="logBien(&#39;stress&#39;,1)" data-val="1">😌</button>
-          <button class="bien-btn" onclick="logBien(&#39;stress&#39;,2)" data-val="2">😶</button>
-          <button class="bien-btn" onclick="logBien(&#39;stress&#39;,3)" data-val="3">😬</button>
-          <button class="bien-btn" onclick="logBien(&#39;stress&#39;,4)" data-val="4">😰</button>
-          <button class="bien-btn" onclick="logBien(&#39;stress&#39;,5)" data-val="5">🤯</button>
+          <button class="bien-btn" onclick="logBien('stress',1)" data-val="1">😌</button>
+          <button class="bien-btn" onclick="logBien('stress',2)" data-val="2">😶</button>
+          <button class="bien-btn" onclick="logBien('stress',3)" data-val="3">😬</button>
+          <button class="bien-btn" onclick="logBien('stress',4)" data-val="4">😰</button>
+          <button class="bien-btn" onclick="logBien('stress',5)" data-val="5">🤯</button>
         </div>
       </div>
     </div>
     <div>
-      <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.4rem">Note du jour</div>
-      <textarea id="bien-note" placeholder="Comment s&#39;est passée ta journée ? Difficultés, réussites, état d&#39;esprit…" style="width:100%;min-height:80px;font-family:&#39;Lora&#39;,serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.6rem .85rem;outline:none;background:var(--sur);resize:none;color:var(--txt)"></textarea>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:.4rem">Note du jour</div>
+      <textarea id="bien-note" placeholder="Comment s'est passée ta journée ? Difficultés, réussites, état d'esprit…" style="width:100%;min-height:80px;font-family:'Lora',serif;font-size:.86rem;border:1px solid var(--bdr);border-radius:8px;padding:.6rem .85rem;outline:none;background:var(--sur);resize:none;color:var(--txt)"></textarea>
       <button class="btn btn-dk btn-sm" onclick="saveBienEntry()" style="margin-top:.5rem">Enregistrer</button>
     </div>
   </div>
@@ -895,7 +902,7 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
   <!-- Conseils bien-être -->
   <div class="card" id="bien-tip-card">
     <div class="clbl">💡 Conseil du jour</div>
-    <div id="bien-tip" style="font-family:&#39;Lora&#39;,serif;font-size:.9rem;line-height:1.7;color:var(--txt)"></div>
+    <div id="bien-tip" style="font-family:'Lora',serif;font-size:.9rem;line-height:1.7;color:var(--txt)"></div>
   </div>
 </div>
 
@@ -903,7 +910,7 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
 <div class="page" id="page-reminders">
   <div class="ph">
     <div class="ph-t">🔔 Rappels</div>
-    <button class="btn btn-dk btn-sm" onclick="openOv(&#39;ov-reminder&#39;)">+ Rappel</button>
+    <button class="btn btn-dk btn-sm" onclick="openOv('ov-reminder')">+ Rappel</button>
   </div>
 
   <!-- Upcoming reminders banner -->
@@ -923,7 +930,7 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
 
   <!-- Past -->
   <div class="card">
-    <div class="clbl" style="cursor:pointer" onclick="var n=this.nextElementSibling;n.style.display=n.style.display===&#39;none&#39;?&#39;block&#39;:&#39;none&#39;">Passés ▾</div>
+    <div class="clbl" style="cursor:pointer" onclick="var n=this.nextElementSibling;n.style.display=n.style.display==='none'?'block':'none'">Passés ▾</div>
     <div id="rem-past" style="display:none"></div>
   </div>
 </div>
@@ -932,18 +939,18 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
 </div>
 
 <!-- OVERLAYS -->
-<div class="ov" id="ov-fiche" onclick="if(event.target===this)closeOv(&#39;ov-fiche&#39;)">
+<div class="ov" id="ov-fiche" onclick="if(event.target===this)closeOv('ov-fiche')">
   <div class="modal">
     <div class="mtitle">Nouvelle fiche</div>
     <div class="mf"><label>Matière</label><select id="fi-mat"><option value="maths">Mathématiques</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philosophie</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Titre</label><input id="fi-title" placeholder="Ex : La décision managériale"></div>
     <div class="mf"><label>Contenu</label><textarea id="fi-content" rows="5" placeholder="Définitions, formules, concepts…"></textarea></div>
     <div class="mf"><label>Difficulté</label><select id="fi-diff"><option value="1">★ Facile</option><option value="2">★★ Moyen</option><option value="3">★★★ Difficile</option></select></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-fiche&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveFiche()">Créer</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-fiche')">Annuler</button><button class="btn btn-dk" onclick="saveFiche()">Créer</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-ev" onclick="if(event.target===this)closeOv(&#39;ov-ev&#39;)">
+<div class="ov" id="ov-ev" onclick="if(event.target===this)closeOv('ov-ev')">
   <div class="modal">
     <div class="mtitle">Ajouter un cours</div>
     <div class="mf"><label>Nom</label><input id="ev-name" placeholder="Maths, Colle, DS…"></div>
@@ -951,11 +958,11 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
     <div class="mf"><label>Heure</label><select id="ev-hour"><option value="8">8h</option><option value="9">9h</option><option value="10">10h</option><option value="11">11h</option><option value="12">12h</option><option value="13">13h</option><option value="14">14h</option><option value="15">15h</option><option value="16">16h</option><option value="17">17h</option><option value="18">18h</option></select></div>
     <div class="mf"><label>Horaires (ex: 8h30–10h25)</label><input id="ev-label" placeholder="8h30–10h25"></div>
     <div class="mf"><label>Matière</label><select id="ev-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-ev&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveEvent()">Ajouter</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-ev')">Annuler</button><button class="btn btn-dk" onclick="saveEvent()">Ajouter</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-kh" onclick="if(event.target===this)closeOv(&#39;ov-kh&#39;)">
+<div class="ov" id="ov-kh" onclick="if(event.target===this)closeOv('ov-kh')">
   <div class="modal">
     <div class="mtitle">Nouvelle khôlle</div>
     <div class="mf"><label>Matière</label><select id="kh-mat"><option value="maths">Maths</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
@@ -964,23 +971,23 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
     <div class="mf"><label>Heure</label><input id="kh-heure" placeholder="17h00"></div>
     <div class="mf"><label>Salle</label><input id="kh-salle" placeholder="Ex: A03"></div>
     <div class="mf"><label>Date de la semaine (lundi)</label><input id="kh-date" type="date"></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-kh&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveKh()">Ajouter</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-kh')">Annuler</button><button class="btn btn-dk" onclick="saveKh()">Ajouter</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-dst" onclick="if(event.target===this)closeOv(&#39;ov-dst&#39;)">
+<div class="ov" id="ov-dst" onclick="if(event.target===this)closeOv('ov-dst')">
   <div class="modal">
     <div class="mtitle">Nouveau DST</div>
     <div class="mf"><label>Matière</label><select id="dst-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Date</label><input id="dst-date" type="date"></div>
-    <div class="mf"><label>Durée</label><select id="dst-dur"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected="">4h</option></select></div>
+    <div class="mf"><label>Durée</label><select id="dst-dur"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected>4h</option></select></div>
     <div class="mf"><label>Type</label><select id="dst-type"><option value="dst">DST</option><option value="oral">Oral blanc</option><option value="cb">CB</option></select></div>
     <div class="mf"><label>Notes</label><textarea id="dst-notes" rows="2" placeholder="Leçons au programme…"></textarea></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-dst&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveDst()">Ajouter</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-dst')">Annuler</button><button class="btn btn-dk" onclick="saveDst()">Ajouter</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-ctrl" onclick="if(event.target===this)closeOv(&#39;ov-ctrl&#39;)">
+<div class="ov" id="ov-ctrl" onclick="if(event.target===this)closeOv('ov-ctrl')">
   <div class="modal">
     <div class="mtitle">Nouveau contrôle</div>
     <div class="mf"><label>Type</label><select id="ctrl-type"><option value="dst">DST</option><option value="kholle">Khôlle</option><option value="partiel">Partiel</option><option value="oral">Oral</option><option value="autre">Autre</option></select></div>
@@ -989,34 +996,32 @@ Formules, définitions, raisonnements, méthodes, citations…" style="width:100
     <div class="mf"><label>Coefficient</label><input id="ctrl-coef" type="number" min="1" max="10" value="1" step="1"></div>
     <div class="mf"><label>Date</label><input id="ctrl-date" type="date"></div>
     <div class="mf"><label>Commentaire (optionnel)</label><input id="ctrl-comment" placeholder="Ex: Chapitre 3, bon résultat"></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-ctrl&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveCtrl()">Ajouter</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-ctrl')">Annuler</button><button class="btn btn-dk" onclick="saveCtrl()">Ajouter</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-cours" onclick="if(event.target===this)closeOv(&#39;ov-cours&#39;)">
+<div class="ov" id="ov-cours" onclick="if(event.target===this)closeOv('ov-cours')">
   <div class="modal">
     <div class="mtitle">Ajouter un cours</div>
     <div class="mf"><label>Titre</label><input id="nc-title" placeholder="Ex: Chapitre 3 — La décision"></div>
     <div class="mf"><label>Matière</label><select id="nc-mat"><option value="maths">Maths</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
-    <div class="mf"><label>Contenu du cours</label><textarea id="nc-content" rows="8" placeholder="Colle ou tape le contenu de ton cours ici…
-
-Tu pourras ensuite générer des flashcards, fiches ou QCM en IA directement depuis la page Cours."></textarea></div>
+    <div class="mf"><label>Contenu du cours</label><textarea id="nc-content" rows="8" placeholder="Colle ou tape le contenu de ton cours ici…&#10;&#10;Tu pourras ensuite générer des flashcards, fiches ou QCM en IA directement depuis la page Cours."></textarea></div>
     <div class="mf"><label>Fichier texte (optionnel)</label><input type="file" id="nc-file" accept=".txt" onchange="loadCoursFile(this)" style="font-size:.8rem"></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-cours&#39;)">Annuler</button><button class="btn btn-dk" onclick="saveCours()">Enregistrer</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-cours')">Annuler</button><button class="btn btn-dk" onclick="saveCours()">Enregistrer</button></div>
   </div>
 </div>
 
-<div class="ov" id="ov-vf" onclick="if(event.target===this)closeOv(&#39;ov-vf&#39;)">
+<div class="ov" id="ov-vf" onclick="if(event.target===this)closeOv('ov-vf')">
   <div class="modal" style="max-width:600px">
-    <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.35rem" id="vf-mat"></div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.35rem" id="vf-mat"></div>
     <div style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px" id="vf-title"></div>
     <div class="fv-body" id="vf-body"></div>
-    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv(&#39;ov-vf&#39;)">Fermer</button><button class="btn btn-sm btn-red" id="vf-del">Supprimer</button></div>
+    <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-vf')">Fermer</button><button class="btn btn-sm btn-red" id="vf-del">Supprimer</button></div>
   </div>
 </div>
 
 <!-- BOT -->
-<button class="bot-btn" onclick="toggleBot()" title="Assistant ECT1">🤖<div class="bot-bdg show" id="bot-bdg"></div></button>
+<button class="bot-btn" onclick="toggleBot()" title="Assistant ECT1">🤖<div class="bot-bdg" id="bot-bdg"></div></button>
 <div class="bot-panel" id="bot-panel">
   <div class="bot-hdr">
     <div class="bot-av">🤖</div>
@@ -1026,13 +1031,41 @@ Tu pourras ensuite générer des flashcards, fiches ou QCM en IA directement dep
   <div class="bot-msgs" id="bot-msgs"></div>
   <div class="bot-sugs" id="bot-sugs"></div>
   <div class="bot-inp-row">
-    <input class="bot-inp" id="bot-inp" placeholder="Pose ta question…" onkeydown="if(event.key===&#39;Enter&#39;)sendBot()">
+    <input class="bot-inp" id="bot-inp" placeholder="Pose ta question…" onkeydown="if(event.key==='Enter')sendBot()">
     <button class="bot-send" onclick="sendBot()">↑</button>
   </div>
 </div>
 
+<!-- FLASHCARD OVERLAY -->
+<div class="ov" id="ov-new-fc" onclick="if(event.target===this)closeOv('ov-new-fc')">
+  <div class="modal">
+    <div class="mtitle">Nouvelle flashcard</div>
+    <div class="mf"><label>Matière</label>
+      <select id="new-fc-mat">
+        <option value="maths">Maths</option>
+        <option value="droit">Droit/Éco</option>
+        <option value="management">Management</option>
+        <option value="anglais">Anglais</option>
+        <option value="culture">Culture G.</option>
+        <option value="philo">Philo</option>
+        <option value="allemand">Allemand</option>
+      </select>
+    </div>
+    <div class="mf"><label>Question</label>
+      <textarea id="new-fc-q" rows="3" placeholder="Ex: Qu'est-ce que la rationalité limitée ?"></textarea>
+    </div>
+    <div class="mf"><label>Réponse</label>
+      <textarea id="new-fc-a" rows="3" placeholder="Ex: Concept de Simon — on cherche une solution satisfaisante, pas optimale."></textarea>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-gh" onclick="closeOv('ov-new-fc')">Annuler</button>
+      <button class="btn btn-dk" onclick="saveNewFlashcard()">Créer</button>
+    </div>
+  </div>
+</div>
+
 <!-- REMINDER OVERLAY -->
-<div class="ov" id="ov-reminder" onclick="if(event.target===this)closeOv(&#39;ov-reminder&#39;)">
+<div class="ov" id="ov-reminder" onclick="if(event.target===this)closeOv('ov-reminder')">
   <div class="modal">
     <div class="mtitle">Nouveau rappel</div>
     <div class="mf">
@@ -1073,7 +1106,7 @@ Tu pourras ensuite générer des flashcards, fiches ou QCM en IA directement dep
       <input id="rem-note" placeholder="Détails supplémentaires...">
     </div>
     <div class="mfoot">
-      <button class="btn btn-gh" onclick="closeOv(&#39;ov-reminder&#39;)">Annuler</button>
+      <button class="btn btn-gh" onclick="closeOv('ov-reminder')">Annuler</button>
       <button class="btn btn-dk" onclick="saveReminder()">Créer</button>
     </div>
   </div>
@@ -1603,19 +1636,20 @@ function renderControls(){
 // ══════════════════════════════════════════════════
 // POMODORO
 // ══════════════════════════════════════════════════
-const P={run:false,t:25*60,brk:false,ses:1,tot:4,iv:null};
+const _prof=ld('ect-profile',{});
+const P={run:false,t:(_prof.pomDur||25)*60,brk:false,ses:1,tot:4,iv:null,pomDur:_prof.pomDur||25,pauseDur:_prof.pauseDur||5};
 function renderPom(){
   const m=String(Math.floor(P.t/60)).padStart(2,'0'),s=String(P.t%60).padStart(2,'0');
   const tEl=document.getElementById('pom-t'),phEl=document.getElementById('pom-ph'),btnEl=document.getElementById('pom-btn'),prc=document.getElementById('prc'),dots=document.getElementById('pom-dots');
   if(tEl)tEl.textContent=m+':'+s;
   if(phEl)phEl.textContent=P.brk?(P.ses%4===0?'Grande pause':'Pause'):'Concentration';
   if(btnEl)btnEl.textContent=P.run?'Pause':'Demarrer';
-  if(prc){const tot=P.brk?(P.ses%4===0?15*60:5*60):25*60;prc.setAttribute('stroke-dashoffset',2*Math.PI*78*(1-P.t/tot));prc.className='prcf'+(P.brk?' brk':'');}
+  if(prc){const tot=P.brk?(P.ses%4===0?P.pauseDur*3*60:P.pauseDur*60):P.pomDur*60;prc.setAttribute('stroke-dashoffset',2*Math.PI*78*(1-P.t/tot));prc.className='prcf'+(P.brk?' brk':'');}
   if(dots){let d='';for(let i=0;i<P.tot;i++)d+=`<div class="pdot${i<P.ses-1?' done':i===P.ses-1?' cur':''}"></div>`;dots.innerHTML=d;}
 }
-function togglePom(){if(P.run){clearInterval(P.iv);P.run=false;renderPom();return;}P.run=true;P.iv=setInterval(()=>{P.t--;if(P.t<=0){clearInterval(P.iv);P.run=false;if(!P.brk){S.poms++;localStorage.setItem('ect-poms',S.poms);updStats();notify('🍅 Pause meritee !');P.brk=true;P.t=P.ses%4===0?15*60:5*60;}else{P.brk=false;P.ses=(P.ses%P.tot)+1;P.t=25*60;notify('💪 Au boulot !');}}renderPom();},1000);renderPom();}
-function resetPom(){clearInterval(P.iv);Object.assign(P,{run:false,t:25*60,brk:false,ses:1,tot:4,iv:null});renderPom();}
-function skipPom(){clearInterval(P.iv);P.run=false;if(!P.brk){P.brk=true;P.t=5*60;}else{P.brk=false;P.ses=Math.min(P.ses+1,P.tot);P.t=25*60;}renderPom();}
+function togglePom(){if(P.run){clearInterval(P.iv);P.run=false;renderPom();return;}P.run=true;P.iv=setInterval(()=>{P.t--;if(P.t<=0){clearInterval(P.iv);P.run=false;if(!P.brk){S.poms++;localStorage.setItem('ect-poms',S.poms);updStats();notify('🍅 Pause meritee !');P.brk=true;P.t=P.ses%4===0?P.pauseDur*3*60:P.pauseDur*60;}else{P.brk=false;P.ses=(P.ses%P.tot)+1;P.t=P.pomDur*60;notify('💪 Au boulot !');}}renderPom();},1000);renderPom();}
+function resetPom(){clearInterval(P.iv);Object.assign(P,{run:false,t:P.pomDur*60,brk:false,ses:1,tot:4,iv:null});renderPom();}
+function skipPom(){clearInterval(P.iv);P.run=false;if(!P.brk){P.brk=true;P.t=P.pauseDur*60;}else{P.brk=false;P.ses=Math.min(P.ses+1,P.tot);P.t=P.pomDur*60;}renderPom();}
 
 // ══════════════════════════════════════════════════
 // KHOLLES
@@ -1722,11 +1756,27 @@ function saveFicheIA(){const d=window.iaFiche;if(!d)return;const contenu=(d.data
 function initSettings(){
   updateSyncUI();
   const p=ld('ect-profile',{});
+  // Pre-fill pom duration
+  const pomEl=document.getElementById('s-pom-dur');
+  const pauseEl=document.getElementById('s-pause-dur');
+  if(pomEl)pomEl.value=p.pomDur||25;
+  if(pauseEl)pauseEl.value=p.pauseDur||5;
   const fields={'s-prenom':p.prenom||'','s-classe':p.classe||'ECT1','s-lycee':p.lycee||'','s-annee':p.annee||'2025-2026'};
   Object.entries(fields).forEach(([id,val])=>{const el=document.getElementById(id);if(el)el.value=val;});
   renderSEv();renderSDst();renderSKh();
 }
-function saveProfile(){const g=id=>document.getElementById(id)?.value||'';const p={prenom:g('s-prenom'),classe:g('s-classe'),lycee:g('s-lycee'),annee:g('s-annee')};localStorage.setItem('ect-profile',JSON.stringify(p));initDate();notify('Profil sauvegarde !');}
+function saveProfile(){
+  const g=id=>document.getElementById(id)?.value||'';
+  const p={
+    prenom:g('s-prenom'),classe:g('s-classe'),lycee:g('s-lycee'),annee:g('s-annee'),
+    pomDur:parseInt(g('s-pom-dur'))||25,
+    pauseDur:parseInt(g('s-pause-dur'))||5
+  };
+  localStorage.setItem('ect-profile',JSON.stringify(p));
+  // Apply new durations immediately
+  if(!P.run){P.t=p.pomDur*60;renderPom();}
+  initDate();notify('Profil sauvegarde !');
+}
 function renderSEv(){const el=document.getElementById('s-ev-list');if(!el)return;el.innerHTML=S.events.slice().sort((a,b)=>a.day-b.day||a.hour-b.hour).map(e=>{const c=MC[e.mat]||'#9e9387';return`<div class="evrow"><div style="width:7px;height:7px;border-radius:50%;background:${c};flex-shrink:0"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut);min-width:28px">${DAYS[e.day].substring(0,3)}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut);min-width:22px">${e.hour}h</span><span style="flex:1;font-size:.82rem;font-weight:600">${e.name}</span><span style="font-size:.7rem;color:var(--mut)">${e.label||''}</span><button class="tdel vis" onclick="sDelEv(${e.id})">x</button></div>`;}).join('')||'<div style="color:var(--mut);font-size:.8rem;margin-bottom:.4rem">Aucun cours</div>';}
 function sAddEvent(){const name=document.getElementById('s-ev-name').value.trim();if(!name){notify('Saisis un nom');return;}S.events.push({id:Date.now(),name,mat:document.getElementById('s-ev-mat').value,day:parseInt(document.getElementById('s-ev-day').value),hour:parseInt(document.getElementById('s-ev-hour').value),label:document.getElementById('s-ev-label').value});sv('ect-events',S.events);document.getElementById('s-ev-name').value='';document.getElementById('s-ev-label').value='';renderSEv();renderTodaySch();notify('Cours ajoute !');}
 function sDelEv(id){S.events=S.events.filter(e=>e.id!==id);sv('ect-events',S.events);renderSEv();renderTodaySch();}
@@ -2989,17 +3039,17 @@ self.addEventListener('push', e => {
 </script>
 
 <!-- PWA Install Banner -->
-<div id="pwa-install-banner" style="display: flex; position: fixed; bottom: 0px; left: 0px; right: 0px; background: rgb(28, 25, 23); color: rgb(248, 246, 241); padding: 1rem 1.25rem; z-index: 1100; align-items: center; gap: 1rem; box-shadow: rgba(0, 0, 0, 0.3) 0px -4px 24px; flex-wrap: wrap;">
+<div id="pwa-install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1c1917;color:#f8f6f1;padding:1rem 1.25rem;z-index:1100;align-items:center;gap:1rem;box-shadow:0 -4px 24px rgba(0,0,0,.3);flex-wrap:wrap">
   <div style="display:flex;align-items:center;gap:.75rem;flex:1">
     <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#c94f2c,#1c1917);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;flex-shrink:0">E</div>
     <div>
       <div style="font-weight:700;font-size:.88rem">Installer ECT1 sur ton téléphone</div>
-      <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:.6rem;opacity:.55;margin-top:.1rem">Accès rapide depuis l'écran d'accueil</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;opacity:.55;margin-top:.1rem">Accès rapide depuis l'écran d'accueil</div>
     </div>
   </div>
   <div style="display:flex;gap:.5rem">
-    <button onclick="installPWA()" style="background:#c94f2c;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-family:&#39;Syne&#39;,sans-serif;font-weight:700;font-size:.8rem;cursor:pointer">Installer</button>
-    <button onclick="document.getElementById(&#39;pwa-install-banner&#39;).style.display=&#39;none&#39;" style="background:rgba(255,255,255,.1);color:#f8f6f1;border:none;border-radius:8px;padding:.5rem .85rem;font-family:&#39;Syne&#39;,sans-serif;font-size:.8rem;cursor:pointer">Plus tard</button>
+    <button onclick="installPWA()" style="background:#c94f2c;color:#fff;border:none;border-radius:8px;padding:.5rem 1.1rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer">Installer</button>
+    <button onclick="document.getElementById('pwa-install-banner').style.display='none'" style="background:rgba(255,255,255,.1);color:#f8f6f1;border:none;border-radius:8px;padding:.5rem .85rem;font-family:'Syne',sans-serif;font-size:.8rem;cursor:pointer">Plus tard</button>
   </div>
 </div>
 
@@ -3007,10 +3057,9 @@ self.addEventListener('push', e => {
 <div id="pwa-ios-tip" style="display:none;position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#1c1917;color:#f8f6f1;padding:1rem 1.25rem;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:1100;max-width:300px;text-align:center">
   <div style="font-size:.88rem;font-weight:700;margin-bottom:.4rem">📲 Installer sur iPhone</div>
   <div style="font-size:.78rem;opacity:.7;line-height:1.6">Appuie sur <strong>⬆️ Partager</strong> puis <strong>"Sur l'écran d'accueil"</strong></div>
-  <button onclick="document.getElementById(&#39;pwa-ios-tip&#39;).style.display=&#39;none&#39;" style="margin-top:.75rem;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:6px;padding:.35rem .85rem;font-size:.76rem;cursor:pointer">OK compris</button>
+  <button onclick="document.getElementById('pwa-ios-tip').style.display='none'" style="margin-top:.75rem;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:6px;padding:.35rem .85rem;font-size:.76rem;cursor:pointer">OK compris</button>
   <div style="position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid #1c1917"></div>
 </div>
 
-
-
-</body></html>
+</body>
+</html>
