@@ -259,6 +259,13 @@ main{padding:2rem 2.5rem;max-width:1000px}
 .overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:99;display:none}
 .overlay-bg.show{display:block}
 
+/* ── MARKDOWN TABLES ── */
+.md-table{width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.85rem}
+.md-table th{background:var(--txt);color:#fff;padding:.45rem .75rem;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.5px}
+.md-table td{padding:.42rem .75rem;border-bottom:1px solid var(--bdr)}
+.md-table tr:nth-child(even) td{background:var(--bg)}
+.md-table tr:hover td{background:var(--bdr)}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .controls-grid{grid-template-columns:repeat(2,1fr)}
@@ -318,7 +325,8 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <button class="nb" onclick="goTo('dst',this)"><span class="nd" style="background:#c03a5a"></span>DST</button>
     <div class="nsec">Fiches par matière</div>
     <button class="nb" onclick="gotoFiches('maths',this)"><span class="nd" style="background:#2e5fa3"></span>Maths</button>
-    <button class="nb" onclick="gotoFiches('droit',this)"><span class="nd" style="background:#d64f3a"></span>Droit / Éco</button>
+    <button class="nb" onclick="gotoFiches('droit',this)"><span class="nd" style="background:#d64f3a"></span>Droit</button>
+    <button class="nb" onclick="gotoFiches('eco',this)"><span class="nd" style="background:#e05a1a"></span>Économie</button>
     <button class="nb" onclick="gotoFiches('management',this)"><span class="nd" style="background:#3a7d5a"></span>Management</button>
     <button class="nb" onclick="gotoFiches('anglais',this)"><span class="nd" style="background:#c08a2a"></span>Anglais</button>
     <button class="nb" onclick="gotoFiches('culture',this)"><span class="nd" style="background:#6b4f8a"></span>Culture G.</button>
@@ -356,7 +364,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="clbl">Tâches du jour</div>
     <div class="irow">
       <input class="inp" id="d-inp" placeholder="Nouvelle tâche rapide…" onkeydown="if(event.key==='Enter')addDashTask()">
-      <select class="sel" id="d-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
+      <select class="sel" id="d-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
       <button class="btn btn-dk" onclick="addDashTask()">+</button>
     </div>
     <ul class="tlist" id="d-list"></ul>
@@ -374,7 +382,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
   <div class="card" style="margin-bottom:.9rem">
     <div class="irow">
       <input class="inp" id="t-inp" placeholder="Nouvelle tâche…" onkeydown="if(event.key==='Enter')addFullTask()">
-      <select class="sel" id="t-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
+      <select class="sel" id="t-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Manag.</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">All.</option></select>
       <button class="btn btn-dk" onclick="addFullTask()">Ajouter</button>
     </div>
   </div>
@@ -433,7 +441,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
           <button class="btn btn-sm btn-red" onclick="closeCoursViewer()">✕ Fermer</button>
         </div>
       </div>
-      <div class="cours-viewer-body" id="cv-body"></div>
+      <div class="cours-viewer-body" id="cv-body" style="white-space:pre-wrap;font-family:'Lora',serif"></div>
     </div>
     <div id="ia-loading" style="display:none;text-align:center;padding:1.5rem">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--mut);letter-spacing:1px" id="ia-ltxt">Génération…</div>
@@ -503,6 +511,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="clbl">👤 Profil</div>
     <div class="sgrid">
       <div class="sf2"><label>Prénom</label><input id="s-prenom" placeholder="Ton prénom"></div>
+      <div class="sf2"><label>Nom du site</label><input id="s-sitename" placeholder="ECT1 — Mon espace"></div>
       <div class="sf2"><label>Classe</label><input id="s-classe" value="ECT1"></div>
       <div class="sf2"><label>Lycée</label><input id="s-lycee" placeholder="Nom du lycée"></div>
       <div class="sf2"><label>Année</label><input id="s-annee" value="2025-2026"></div>
@@ -525,7 +534,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
       <div class="sf2"><label>Cours</label><input class="inp" id="s-ev-name" placeholder="Nom…"></div>
       <div class="sf2"><label>Jour</label><select class="sel" id="s-ev-day" style="width:100%"><option value="0">Lundi</option><option value="1">Mardi</option><option value="2">Mercredi</option><option value="3">Jeudi</option><option value="4">Vendredi</option><option value="5">Samedi</option></select></div>
       <div class="sf2"><label>Heure</label><select class="sel" id="s-ev-hour" style="width:100%"><option value="8">8h</option><option value="9">9h</option><option value="10">10h</option><option value="11">11h</option><option value="12">12h</option><option value="13">13h</option><option value="14">14h</option><option value="15">15h</option><option value="16">16h</option><option value="17">17h</option><option value="18">18h</option></select></div>
-      <div class="sf2"><label>Matière</label><select class="sel" id="s-ev-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+      <div class="sf2"><label>Matière</label><select class="sel" id="s-ev-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
       <div class="sf2"><label>Horaires</label><input class="inp" id="s-ev-label" placeholder="8h30–10h25"></div>
       <button class="btn btn-dk btn-sm" onclick="sAddEvent()" style="align-self:flex-end">+</button>
     </div>
@@ -534,7 +543,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="clbl">📝 DST</div>
     <div id="s-dst-list"></div>
     <div class="sadd">
-      <div class="sf2"><label>Matière</label><select class="sel" id="s-dst-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+      <div class="sf2"><label>Matière</label><select class="sel" id="s-dst-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
       <div class="sf2"><label>Date</label><input class="inp" type="date" id="s-dst-date"></div>
       <div class="sf2"><label>Durée</label><select class="sel" id="s-dst-dur" style="width:100%"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected>4h</option></select></div>
       <div class="sf2"><label>Type</label><select class="sel" id="s-dst-type" style="width:100%"><option value="dst">DST</option><option value="oral">Oral blanc</option><option value="cb">CB</option></select></div>
@@ -546,7 +555,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <div class="clbl">🎤 Khôlles</div>
     <div id="s-kh-list"></div>
     <div class="sadd">
-      <div class="sf2"><label>Matière</label><select class="sel" id="s-kh-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+      <div class="sf2"><label>Matière</label><select class="sel" id="s-kh-mat" style="width:100%"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
       <div class="sf2"><label>Jour</label><select class="sel" id="s-kh-day" style="width:100%"><option value="0">Lun</option><option value="1">Mar</option><option value="2">Mer</option><option value="3">Jeu</option><option value="4">Ven</option><option value="5">Sam</option></select></div>
       <div class="sf2"><label>Heure</label><input class="inp" id="s-kh-heure" placeholder="17h00"></div>
       <div class="sf2"><label>Prof</label><input class="inp" id="s-kh-prof" placeholder="Optionnel"></div>
@@ -724,7 +733,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
         <input id="note-title-inp" placeholder="Titre de la note…" style="flex:1;font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;border:none;outline:none;background:transparent;color:var(--txt);min-width:0">
         <select id="note-mat-sel" class="sel" style="font-size:.74rem">
           <option value="maths">Maths</option>
-          <option value="droit">Droit/Éco</option>
+          <option value="droit">Droit</option>
+          <option value="eco">Économie</option>
           <option value="management">Management</option>
           <option value="anglais">Anglais</option>
           <option value="culture">Culture G.</option>
@@ -953,7 +963,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 <div class="ov" id="ov-fiche" onclick="if(event.target===this)closeOv('ov-fiche')">
   <div class="modal">
     <div class="mtitle">Nouvelle fiche</div>
-    <div class="mf"><label>Matière</label><select id="fi-mat"><option value="maths">Mathématiques</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philosophie</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="fi-mat"><option value="maths">Mathématiques</option><option value="droit">Droit</option>
+          <option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philosophie</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Titre</label><input id="fi-title" placeholder="Ex : La décision managériale"></div>
     <div class="mf"><label>Contenu</label><textarea id="fi-content" rows="5" placeholder="Définitions, formules, concepts…"></textarea></div>
     <div class="mf"><label>Difficulté</label><select id="fi-diff"><option value="1">★ Facile</option><option value="2">★★ Moyen</option><option value="3">★★★ Difficile</option></select></div>
@@ -968,7 +979,7 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
     <div class="mf"><label>Jour</label><select id="ev-day"><option value="0">Lundi</option><option value="1">Mardi</option><option value="2">Mercredi</option><option value="3">Jeudi</option><option value="4">Vendredi</option><option value="5">Samedi</option></select></div>
     <div class="mf"><label>Heure</label><select id="ev-hour"><option value="8">8h</option><option value="9">9h</option><option value="10">10h</option><option value="11">11h</option><option value="12">12h</option><option value="13">13h</option><option value="14">14h</option><option value="15">15h</option><option value="16">16h</option><option value="17">17h</option><option value="18">18h</option></select></div>
     <div class="mf"><label>Horaires (ex: 8h30–10h25)</label><input id="ev-label" placeholder="8h30–10h25"></div>
-    <div class="mf"><label>Matière</label><select id="ev-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="ev-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mfoot"><button class="btn btn-gh" onclick="closeOv('ov-ev')">Annuler</button><button class="btn btn-dk" onclick="saveEvent()">Ajouter</button></div>
   </div>
 </div>
@@ -976,7 +987,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 <div class="ov" id="ov-kh" onclick="if(event.target===this)closeOv('ov-kh')">
   <div class="modal">
     <div class="mtitle">Nouvelle khôlle</div>
-    <div class="mf"><label>Matière</label><select id="kh-mat"><option value="maths">Maths</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="kh-mat"><option value="maths">Maths</option><option value="droit">Droit</option>
+          <option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Professeur</label><input id="kh-prof" placeholder="Ex: HUCK A."></div>
     <div class="mf"><label>Jour de la semaine</label><select id="kh-day"><option value="0">Lundi</option><option value="1">Mardi</option><option value="2">Mercredi</option><option value="3">Jeudi</option><option value="4">Vendredi</option><option value="5">Samedi</option></select></div>
     <div class="mf"><label>Heure</label><input id="kh-heure" placeholder="17h00"></div>
@@ -989,7 +1001,7 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 <div class="ov" id="ov-dst" onclick="if(event.target===this)closeOv('ov-dst')">
   <div class="modal">
     <div class="mtitle">Nouveau DST</div>
-    <div class="mf"><label>Matière</label><select id="dst-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="dst-mat"><option value="maths">Maths</option><option value="droit">Droit</option><option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Date</label><input id="dst-date" type="date"></div>
     <div class="mf"><label>Durée</label><select id="dst-dur"><option value="2h">2h</option><option value="3h">3h</option><option value="4h" selected>4h</option></select></div>
     <div class="mf"><label>Type</label><select id="dst-type"><option value="dst">DST</option><option value="oral">Oral blanc</option><option value="cb">CB</option></select></div>
@@ -1002,7 +1014,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
   <div class="modal">
     <div class="mtitle">Nouveau contrôle</div>
     <div class="mf"><label>Type</label><select id="ctrl-type"><option value="dst">DST</option><option value="kholle">Khôlle</option><option value="partiel">Partiel</option><option value="oral">Oral</option><option value="autre">Autre</option></select></div>
-    <div class="mf"><label>Matière</label><select id="ctrl-mat"><option value="maths">Maths</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="ctrl-mat"><option value="maths">Maths</option><option value="droit">Droit</option>
+          <option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Note (ex: 14.5)</label><input id="ctrl-note" type="number" min="0" max="20" step="0.5" placeholder="Note sur 20"></div>
     <div class="mf"><label>Coefficient</label><input id="ctrl-coef" type="number" min="1" max="10" value="1" step="1"></div>
     <div class="mf"><label>Date</label><input id="ctrl-date" type="date"></div>
@@ -1015,7 +1028,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
   <div class="modal">
     <div class="mtitle">Ajouter un cours</div>
     <div class="mf"><label>Titre</label><input id="nc-title" placeholder="Ex: Chapitre 3 — La décision"></div>
-    <div class="mf"><label>Matière</label><select id="nc-mat"><option value="maths">Maths</option><option value="droit">Droit/Éco</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
+    <div class="mf"><label>Matière</label><select id="nc-mat"><option value="maths">Maths</option><option value="droit">Droit</option>
+          <option value="eco">Économie</option><option value="management">Management</option><option value="anglais">Anglais</option><option value="culture">Culture G.</option><option value="philo">Philo</option><option value="allemand">Allemand</option></select></div>
     <div class="mf"><label>Contenu du cours</label><textarea id="nc-content" rows="6" placeholder="Colle ou tape le contenu de ton cours ici…"></textarea></div>
     <div style="background:var(--bg);border-radius:8px;padding:.85rem 1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
       <div style="font-weight:700;font-size:.82rem;margin-bottom:.6rem">📎 Ou importe un fichier</div>
@@ -1067,7 +1081,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
     <div class="mf"><label>Matière</label>
       <select id="new-fc-mat">
         <option value="maths">Maths</option>
-        <option value="droit">Droit/Éco</option>
+        <option value="droit">Droit</option>
+          <option value="eco">Économie</option>
         <option value="management">Management</option>
         <option value="anglais">Anglais</option>
         <option value="culture">Culture G.</option>
@@ -1103,7 +1118,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
       </div>
       <div class="mf"><label>Matière</label>
         <select id="imp-mat">
-          <option value="maths">Maths</option><option value="droit">Droit/Éco</option>
+          <option value="maths">Maths</option><option value="droit">Droit</option>
+          <option value="eco">Économie</option>
           <option value="management">Management</option><option value="anglais">Anglais</option>
           <option value="culture">Culture G.</option><option value="philo">Philo</option>
           <option value="allemand">Allemand</option>
@@ -1156,7 +1172,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
       <select id="rem-mat">
         <option value="">— Aucune —</option>
         <option value="maths">Maths</option>
-        <option value="droit">Droit/Éco</option>
+        <option value="droit">Droit</option>
+          <option value="eco">Économie</option>
         <option value="management">Management</option>
         <option value="anglais">Anglais</option>
         <option value="culture">Culture G.</option>
@@ -1190,7 +1207,7 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 // CONSTANTS
 // ══════════════════════════════════════════════════
 const MC  = {maths:'#2e5fa3',droit:'#d64f3a',management:'#3a7d5a',anglais:'#c08a2a',culture:'#6b4f8a',philo:'#78716c',allemand:'#8a5a2a'};
-const ML  = {maths:'Maths',droit:'Droit/Éco',management:'Management',anglais:'Anglais',culture:'Culture G.',philo:'Philo',allemand:'Allemand'};
+const ML  = {maths:'Maths',droit:'Droit',eco:'Économie',management:'Management',anglais:'Anglais',culture:'Culture G.',philo:'Philo',allemand:'Allemand'};
 const DAYS  = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 const DAYSS = ['L','M','M','J','V','S','D'];
 const MONTHS= ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
@@ -1428,6 +1445,7 @@ const S={
   controls:ld('ect-ctrl',[]),
   poms:    parseInt(localStorage.getItem('ect-poms')||'0'),
   notes:    ld('ect-notes', []),
+  reminders:ld('ect-reminders',[]),
   wellbeing:ld('ect-well', []),
   anki:     ld('ect-anki', []),
   goals:    ld('ect-goals', {}),
@@ -1489,7 +1507,8 @@ function initDate(){
   if(ts)ts.textContent=(DAYS[di]||'Dimanche').toUpperCase()+' '+n.getDate()+' '+MONTHS[n.getMonth()].toUpperCase()+' '+n.getFullYear();
   const ld2=document.getElementById('ld');
   if(ld2)ld2.textContent=n.getDate()+' '+MONTHS[n.getMonth()];
-  if(p.classe){const bs=document.getElementById('brand-sub');if(bs)bs.textContent=p.classe+' - Espace revision';}
+  if(p.sitename){document.title=p.sitename;}
+  if(p.classe){const bs=document.getElementById('brand-sub');if(bs)bs.textContent=p.sitename||p.classe+' - Espace revision';}
 }
 initDate();setInterval(initDate,60000);
 
@@ -1681,8 +1700,11 @@ function loadCoursFile(input){
         if(status)status.textContent='PDF extrait avec succes ! '+text.length+' caracteres';
         notify('PDF importe !');
       }catch(e){
-        if(status)status.textContent='Erreur extraction PDF';
-        notify('Erreur lecture PDF');
+        if(status){
+          status.style.color='var(--droit)';
+          status.textContent='Le PDF ne peut pas etre lu directement. Ouvre-le, selectionne tout (Ctrl+A), copie (Ctrl+C) et colle dans la zone de texte ci-dessus.';
+        }
+        notify('Colle le texte du PDF directement !');
       }
     };
     r.readAsDataURL(file);
@@ -1747,7 +1769,7 @@ function openCoursViewer(id){
   document.getElementById('cv-mat').style.color=MC[c.mat]||'var(--mut)';
   document.getElementById('cv-title').textContent=c.title;
   document.getElementById('cv-meta').textContent=c.date+' · '+(c.pages||1)+' page(s)';
-  document.getElementById('cv-body').textContent=c.content;
+  const cvBody=document.getElementById('cv-body');if(cvBody){cvBody.innerHTML=renderMarkdown(c.content);}
   document.getElementById('ia-output').innerHTML='';
   document.getElementById('cours-viewer-section').style.display='block';
   document.getElementById('cours-viewer-section').scrollIntoView({behavior:'smooth'});
@@ -1940,14 +1962,14 @@ function initSettings(){
   const pomSesEl=document.getElementById('s-pom-sessions');
   if(pauseLongEl)pauseLongEl.value=p.pauseLong||15;
   if(pomSesEl)pomSesEl.value=p.pomSessions||4;
-  const fields={'s-prenom':p.prenom||'','s-classe':p.classe||'ECT1','s-lycee':p.lycee||'','s-annee':p.annee||'2025-2026'};
+  const fields={'s-prenom':p.prenom||'','s-sitename':p.sitename||'','s-classe':p.classe||'ECT1','s-lycee':p.lycee||'','s-annee':p.annee||'2025-2026'};
   Object.entries(fields).forEach(([id,val])=>{const el=document.getElementById(id);if(el)el.value=val;});
   renderSEv();renderSDst();renderSKh();
 }
 function saveProfile(){
   const g=id=>document.getElementById(id)?.value||'';
   const p={
-    prenom:g('s-prenom'),classe:g('s-classe'),lycee:g('s-lycee'),annee:g('s-annee'),
+    prenom:g('s-prenom'),sitename:g('s-sitename'),classe:g('s-classe'),lycee:g('s-lycee'),annee:g('s-annee'),
     pomDur:parseInt(g('s-pom-dur'))||25,
     pauseDur:parseInt(g('s-pause-dur'))||5,
     pauseLong:parseInt(g('s-pause-long'))||15,
@@ -2516,7 +2538,7 @@ function logWell(key, val) {
 // ══════════════════════════════════════════════════
 // REMINDERS (Rappels style iPhone)
 // ══════════════════════════════════════════════════
-if(!S.reminders) S.reminders = ld('ect-reminders', []);
+// reminders loaded in S
 
 const REM_PRIORITY = {normal:'🔵', important:'🟡', urgent:'🔴'};
 const REM_PRIORITY_COLOR = {normal:'#3b82f6', important:'#f59e0b', urgent:'#ef4444'};
@@ -2670,6 +2692,50 @@ setInterval(checkReminderAlerts, 60000);
 checkReminderAlerts();
 
 
+
+
+// ══════════════════════════════════════════════════
+// MARKDOWN RENDERER (tableaux + formatage basique)
+// ══════════════════════════════════════════════════
+function renderMarkdown(text) {
+  if(!text) return '';
+  let html = text;
+
+  // Tables: | col1 | col2 |
+  html = html.replace(/((\|.+\|\n?)+)/g, (match) => {
+    const rows = match.trim().split('\n').filter(r => r.trim());
+    if(rows.length < 2) return match;
+    let tableHTML = '<table class="md-table">';
+    rows.forEach((row, i) => {
+      if(row.replace(/[\s|\-]/g,'').length === 0) return; // skip separator
+      const cells = row.split('|').filter((_,j,a) => j>0 && j<a.length-1);
+      const tag = i === 0 ? 'th' : 'td';
+      tableHTML += '<tr>'+cells.map(c=>`<${tag}>${c.trim()}</${tag}>`).join('')+'</tr>';
+    });
+    tableHTML += '</table>';
+    return tableHTML;
+  });
+
+  // Bold **text**
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Italic *text*
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Headers ### ## #
+  html = html.replace(/^### (.+)$/gm, '<div style="font-weight:800;font-size:.95rem;margin:.75rem 0 .3rem;color:var(--txt)">$1</div>');
+  html = html.replace(/^## (.+)$/gm, '<div style="font-weight:800;font-size:1.05rem;margin:1rem 0 .35rem;border-bottom:1px solid var(--bdr);padding-bottom:.25rem">$1</div>');
+  html = html.replace(/^# (.+)$/gm, '<div style="font-weight:800;font-size:1.2rem;margin:1rem 0 .4rem">$1</div>');
+
+  // Lists - item
+  html = html.replace(/^- (.+)$/gm, '<div style="display:flex;gap:.4rem;margin:.15rem 0"><span style="color:var(--mut)">•</span><span>$1</span></div>');
+
+  // Line breaks
+  html = html.replace(/\n\n/g, '<br><br>');
+  html = html.replace(/\n/g, '<br>');
+
+  return html;
+}
 
 // ══════════════════════════════════════════════════
 // IMPORT FICHES (CSV/Quizlet/Anki)
