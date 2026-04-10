@@ -825,50 +825,94 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 <div class="page" id="page-anki">
   <div class="ph">
     <div class="ph-t">🃏 Flashcards</div>
-    <button class="btn btn-dk btn-sm" onclick="openOv('ov-new-fc')">+ Carte</button>
+    <div style="display:flex;gap:.4rem">
+      <button class="btn btn-dk btn-sm" onclick="openOv('ov-new-fc')">+ Carte</button>
+      <button class="btn btn-gh btn-sm" onclick="startAnkiSession()">▶ Réviser</button>
+    </div>
   </div>
 
-  <!-- Mode révision -->
-  <div id="anki-review" style="display:none">
-    <div style="text-align:center;margin-bottom:1rem">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--mut);margin-bottom:.4rem" id="anki-progress-lbl">0 cartes restantes</div>
-      <div style="height:4px;background:var(--bdr);border-radius:4px;overflow:hidden;max-width:400px;margin:0 auto .75rem">
-        <div id="anki-progress-bar" style="height:100%;background:var(--management);border-radius:4px;transition:width .4s ease;width:0%"></div>
-      </div>
+  <!-- Stats bar -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-bottom:1.25rem" id="anki-stats-bar">
+    <div class="card" style="text-align:center;padding:.85rem;border-top:3px solid var(--management)">
+      <div style="font-size:1.4rem;font-weight:800" id="anki-count-new">0</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem">Nouvelles</div>
     </div>
-    <div style="perspective:1000px;max-width:520px;margin:0 auto 1.25rem">
-      <div id="anki-card" onclick="flipAnkiCard()" style="position:relative;min-height:200px;transform-style:preserve-3d;transition:transform .5s;cursor:pointer;border-radius:12px">
-        <div id="anki-front" style="position:absolute;inset:0;backface-visibility:hidden;background:var(--txt);color:#fff;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;opacity:.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Question — appuie pour retourner</div>
-          <div id="anki-q" style="font-size:1rem;font-weight:700;line-height:1.5"></div>
-          <div id="anki-mat-badge" style="margin-top:1rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;padding:.2rem .6rem;border-radius:4px;opacity:.7"></div>
+    <div class="card" style="text-align:center;padding:.85rem;border-top:3px solid var(--orange)">
+      <div style="font-size:1.4rem;font-weight:800" id="anki-count-due">0</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem">À réviser</div>
+    </div>
+    <div class="card" style="text-align:center;padding:.85rem;border-top:3px solid var(--management)">
+      <div style="font-size:1.4rem;font-weight:800" id="anki-count-ok">0</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem">Maîtrisées</div>
+    </div>
+    <div class="card" style="text-align:center;padding:.85rem;border-top:3px solid var(--maths)">
+      <div style="font-size:1.4rem;font-weight:800" id="anki-count-total">0</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem">Total</div>
+    </div>
+  </div>
+
+  <!-- SESSION MODE -->
+  <div id="anki-session-mode" style="display:none">
+    <!-- Progress -->
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem">
+      <div style="flex:1;height:6px;background:var(--bdr);border-radius:3px;overflow:hidden">
+        <div id="anki-prog-bar" style="height:100%;background:var(--management);border-radius:3px;transition:width .4s ease;width:0%"></div>
+      </div>
+      <span id="anki-prog-txt" style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--mut);white-space:nowrap">0/0</span>
+    </div>
+
+    <!-- Card -->
+    <div style="perspective:1200px;max-width:580px;margin:0 auto 1.5rem">
+      <div id="anki-card" onclick="flipAnkiCard()" style="position:relative;height:220px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;border-radius:14px">
+        <!-- Front -->
+        <div style="position:absolute;inset:0;backface-visibility:hidden;background:linear-gradient(135deg,#1c1917,#2d2521);color:#fff;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
+          <div id="anki-mat-lbl" style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;opacity:.4;text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem"></div>
+          <div id="anki-q" style="font-size:1.05rem;font-weight:700;line-height:1.5"></div>
+          <div style="position:absolute;bottom:.85rem;font-family:'IBM Plex Mono',monospace;font-size:.56rem;opacity:.3;text-transform:uppercase;letter-spacing:1.5px">Appuie pour voir la réponse</div>
         </div>
-        <div id="anki-back" style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);background:var(--sur);border:2px solid var(--bdr);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--mut);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Réponse</div>
+        <!-- Back -->
+        <div id="anki-back-face" style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);background:var(--sur);border:2px solid var(--bdr);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;color:var(--mut);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem">Réponse</div>
           <div id="anki-a" style="font-size:.95rem;line-height:1.6;color:var(--txt)"></div>
         </div>
       </div>
     </div>
-    <div id="anki-rate-btns" style="display:none;justify-content:center;gap:.5rem;flex-wrap:wrap">
-      <button class="btn" onclick="rateAnki(1)" style="background:#fee2e2;color:var(--droit);border:1px solid rgba(214,79,58,.3);font-size:.78rem">😰 Difficile<br><span style="font-size:.62rem;opacity:.7">+1 jour</span></button>
-      <button class="btn" onclick="rateAnki(3)" style="background:#fef3c7;color:#92400e;border:1px solid rgba(212,160,23,.3);font-size:.78rem">😐 Moyen<br><span style="font-size:.62rem;opacity:.7">+3 jours</span></button>
-      <button class="btn" onclick="rateAnki(7)" style="background:#d1fae5;color:var(--management);border:1px solid rgba(58,125,90,.3);font-size:.78rem">😊 Facile<br><span style="font-size:.62rem;opacity:.7">+7 jours</span></button>
-      <button class="btn" onclick="rateAnki(30)" style="background:#ede9fe;color:#7c3aed;border:1px solid rgba(139,92,246,.3);font-size:.78rem">🎯 Maîtrisé<br><span style="font-size:.62rem;opacity:.7">+30 jours</span></button>
+
+    <!-- Rating buttons (hidden until flipped) -->
+    <div id="anki-rate-btns" style="display:none;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
+      <button onclick="rateAnki(1)" style="font-family:'Syne',sans-serif;font-weight:700;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;background:#fee2e2;color:#b91c1c;font-size:.82rem;transition:opacity .15s">
+        😰 Difficile<br><span style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;opacity:.65">Revoir demain</span>
+      </button>
+      <button onclick="rateAnki(3)" style="font-family:'Syne',sans-serif;font-weight:700;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;background:#fef3c7;color:#92400e;font-size:.82rem;transition:opacity .15s">
+        😐 Moyen<br><span style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;opacity:.65">Revoir dans 3j</span>
+      </button>
+      <button onclick="rateAnki(7)" style="font-family:'Syne',sans-serif;font-weight:700;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;background:#d1fae5;color:#065f46;font-size:.82rem;transition:opacity .15s">
+        😊 Bien<br><span style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;opacity:.65">Revoir dans 7j</span>
+      </button>
+      <button onclick="rateAnki(14)" style="font-family:'Syne',sans-serif;font-weight:700;padding:.6rem 1.2rem;border-radius:8px;border:none;cursor:pointer;background:#dbeafe;color:#1e40af;font-size:.82rem;transition:opacity .15s">
+        🌟 Facile<br><span style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;opacity:.65">Revoir dans 14j</span>
+      </button>
+    </div>
+    <div style="text-align:center">
+      <button class="btn btn-gh btn-sm" onclick="endAnkiSession()">Terminer la session</button>
     </div>
   </div>
 
-  <!-- Vue bibliothèque -->
-  <div id="anki-library">
-    <div style="display:flex;gap:.5rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center">
-      <div id="anki-due-banner" style="flex:1;padding:.65rem 1rem;background:var(--txt);color:#fff;border-radius:8px;font-size:.84rem;font-weight:600"></div>
-      <button class="btn btn-dk" id="anki-start-btn" onclick="startAnkiSession()" style="white-space:nowrap">▶ Réviser</button>
+  <!-- LIST MODE -->
+  <div id="anki-list-mode">
+    <!-- Filter by mat -->
+    <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1rem" id="anki-mat-filters"></div>
+    <!-- Cards list -->
+    <div id="anki-list" style="display:flex;flex-direction:column;gap:.3rem"></div>
+    <div id="anki-empty" style="display:none;text-align:center;padding:3rem 1rem;color:var(--mut)">
+      <div style="font-size:2rem;margin-bottom:.75rem">🃏</div>
+      <div style="font-weight:700;margin-bottom:.3rem">Aucune flashcard</div>
+      <div style="font-size:.82rem">Crée ta première carte ou génère-en depuis un cours !</div>
+      <button class="btn btn-dk btn-sm" onclick="openOv('ov-new-fc')" style="margin-top:1rem">+ Créer une carte</button>
     </div>
-    <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1rem" id="anki-mat-filter"></div>
-    <div id="anki-cards-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem"></div>
   </div>
 </div>
 
-<!-- ═══ BIEN-ÊTRE ═══ -->
 <div class="page" id="page-bienetre">
   <div class="ph"><div class="ph-t">😴 Bien-être</div></div>
 
@@ -1431,6 +1475,7 @@ function showSyncIndicator(state) {
   if(state === 'saved' || state === 'synced') setTimeout(()=>{el.style.opacity='0';}, 3000);
 }
 function tstr(){return new Date().toLocaleDateString('fr-FR');}
+function todayISO(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function fmtD(s){const d=new Date(s);return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}
 function fmtDs(s){const d=new Date(s);return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});}
 function dayDiff(dateStr){return Math.ceil((new Date(dateStr+'T12:00')-new Date())/(864e5));}
@@ -1678,7 +1723,9 @@ function loadCoursFile(input){
   const file=input.files[0];if(!file)return;
   const status=document.getElementById('nc-file-status');
   if(status){status.style.display='block';status.textContent='Chargement...';}
-  if(file.type==='application/pdf'||file.name.endsWith('.pdf')){
+  // Any file that's a PDF
+  const isPDF = file.type==='application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+  if(isPDF){
     // Read PDF as base64 and send to Claude API
     const r=new FileReader();
     r.onload=async e=>{
@@ -1700,11 +1747,20 @@ function loadCoursFile(input){
         if(status)status.textContent='PDF extrait avec succes ! '+text.length+' caracteres';
         notify('PDF importe !');
       }catch(e){
-        if(status){
-          status.style.color='var(--droit)';
-          status.textContent='Le PDF ne peut pas etre lu directement. Ouvre-le, selectionne tout (Ctrl+A), copie (Ctrl+C) et colle dans la zone de texte ci-dessus.';
-        }
-        notify('Colle le texte du PDF directement !');
+        // Try fallback: read as text
+        const fr2=new FileReader();
+        fr2.onload=e2=>{
+          const txt=e2.target.result;
+          if(txt&&txt.length>50){
+            document.getElementById('nc-content').value=txt;
+            document.getElementById('nc-title').value=file.name.replace(/\.[^.]+$/,'');
+            if(status){status.style.color='var(--management)';status.textContent='Texte extrait: '+txt.length+' caracteres';}
+            notify('Cours charge !');
+          } else {
+            if(status){status.style.color='var(--anglais)';status.textContent='PDF protege - ouvre-le, fais Ctrl+A puis Ctrl+C et colle dans la zone de texte.';}
+          }
+        };
+        fr2.readAsText(file);
       }
     };
     r.readAsDataURL(file);
@@ -1745,7 +1801,26 @@ async function loadCoursAudio(input){
     if(status)status.textContent='Erreur audio';
   }
 }
-function saveCours(){const title=document.getElementById('nc-title').value.trim(),content=document.getElementById('nc-content').value.trim(),mat=document.getElementById('nc-mat').value;if(!title||!content){notify('Titre et contenu requis');return;}S.cours.unshift({id:Date.now(),title,mat,content,date:tstr(),pages:Math.ceil(content.length/1500)});sv('ect-cours',S.cours);document.getElementById('nc-title').value='';document.getElementById('nc-content').value='';closeOv('ov-cours');renderCours();notify('Cours enregistre !');}
+function saveCours(){
+  const titleEl=document.getElementById('nc-title');
+  const title=titleEl.value.trim();
+  const body=document.getElementById('nc-content').value.trim();
+  const mat=document.getElementById('nc-mat').value;
+  if(!title||!body){notify('Titre et contenu requis');return;}
+  const editId=titleEl.dataset.editId;
+  if(editId){
+    const idx=S.cours.findIndex(x=>x.id==editId);
+    if(idx>=0){S.cours[idx]={...S.cours[idx],title,mat,content:body,pages:Math.ceil(body.length/1500),date:tstr()};}
+    titleEl.dataset.editId='';
+    notify('Cours mis a jour !');
+  } else {
+    S.cours.unshift({id:Date.now(),title,mat,content:body,date:tstr(),pages:Math.ceil(body.length/1500)});
+    notify('Cours enregistre !');
+  }
+  sv('ect-cours',S.cours);
+  titleEl.value='';document.getElementById('nc-content').value='';
+  closeOv('ov-cours');renderCours();
+}
 function renderCours(){
   const el=document.getElementById('cours-by-mat');if(!el)return;
   if(!S.cours.length){el.innerHTML='<div class="card" style="text-align:center;padding:2rem;color:var(--mut)">Aucun cours. Clique sur <strong>+ Ajouter un cours</strong> pour commencer.</div>';return;}
@@ -1786,6 +1861,15 @@ function genFromCours(type){
   }
 }
 function delCours(id){S.cours=S.cours.filter(x=>x.id!==id);sv('ect-cours',S.cours);renderCours();if(S.curCours&&S.curCours.id===id)closeCoursViewer();}
+function editCours(id){
+  const c=S.cours.find(x=>x.id===id);if(!c)return;
+  document.getElementById('nc-title').value=c.title;
+  document.getElementById('nc-mat').value=c.mat||'maths';
+  document.getElementById('nc-content').value=c.content;
+  // Store editing id
+  document.getElementById('nc-title').dataset.editId=id;
+  openOv('ov-cours');
+}
 
 // ══════════════════════════════════════════════════
 // CONTROLS (notes)
@@ -2590,7 +2674,7 @@ function delReminder(id) {
 
 function renderReminders() {
   const now   = new Date();
-  const today = tstr();
+  const today = todayISO();
 
   const todayRems    = S.reminders.filter(r => r.date === today && !r.done)
                                    .sort((a,b) => a.time.localeCompare(b.time));
@@ -2673,7 +2757,7 @@ function renderReminders() {
 function checkReminderAlerts() {
   if(!('Notification' in window) || Notification.permission !== 'granted') return;
   const now   = new Date();
-  const today = tstr();
+  const today = todayISO();
   const hhmm  = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
   S.reminders.filter(r => !r.done && r.date === today && r.time === hhmm).forEach(r => {
     new Notification('🔔 ECT1 — Rappel', {
@@ -2682,7 +2766,7 @@ function checkReminderAlerts() {
     });
   });
   // Badge on bot button if reminders due today
-  const todayDue = S.reminders.filter(r => !r.done && r.date === today).length;
+  const _todayISO = todayISO(); const todayDue = S.reminders.filter(r => !r.done && r.date === _todayISO).length;
   if(todayDue > 0) {
     const bdg = document.getElementById('bot-bdg');
     if(bdg) bdg.classList.add('show');
@@ -2887,79 +2971,191 @@ function renderCal() {
   el.innerHTML = html;
 }
 
-// ── Anki (Flashcards avec répétition espacée) ──
-let ankiCards = [], ankiIdx = 0, ankiSession = [];
+// ── Anki (Flashcards style Anki/AngloApp) ──
+let _ankiFilter = null;
+
 function initAnki() {
-  ankiCards = ld('ect-flash', []);
-  if(!ankiCards.length) ankiCards = S.fiches.flatMap(f => [{id:Date.now()+Math.random(), mat:f.mat, q:f.title, a:f.content.substring(0,200), status:'nouveau', nextReview:tstr()}]);
+  renderAnkiStats();
+  renderAnkiMatFilters();
   renderAnkiList();
 }
+
+function getAnkiCards() {
+  return JSON.parse(localStorage.getItem('ect-flash') || '[]');
+}
+function saveAnkiCards(cards) {
+  localStorage.setItem('ect-flash', JSON.stringify(cards));
+  if(CLOUD && CLOUD.enabled) cloudPush('ect-flash', JSON.stringify(cards));
+}
+
+function renderAnkiStats() {
+  const cards = getAnkiCards();
+  const today = todayISO();
+  const newCards = cards.filter(c => !c.status || c.status === 'nouveau').length;
+  const due = cards.filter(c => c.nextReview && c.nextReview <= today && c.status !== 'nouveau').length;
+  const ok = cards.filter(c => c.status === 'facile').length;
+  const el1=document.getElementById('anki-count-new');
+  const el2=document.getElementById('anki-count-due');
+  const el3=document.getElementById('anki-count-ok');
+  const el4=document.getElementById('anki-count-total');
+  if(el1)el1.textContent=newCards;
+  if(el2)el2.textContent=due;
+  if(el3)el3.textContent=ok;
+  if(el4)el4.textContent=cards.length;
+}
+
+function renderAnkiMatFilters() {
+  const cards = getAnkiCards();
+  const mats = [...new Set(cards.map(c=>c.mat).filter(Boolean))];
+  const el = document.getElementById('anki-mat-filters');
+  if(!el) return;
+  const allBtn = document.createElement('button');
+  allBtn.className = 'btn btn-sm ' + (_ankiFilter===null?'btn-dk':'btn-gh');
+  allBtn.style.fontSize = '.7rem';
+  allBtn.textContent = 'Toutes';
+  allBtn.onclick = () => filterAnki(null);
+  el.innerHTML = '';
+  el.appendChild(allBtn);
+  mats.forEach(m => {
+    const c = MC[m]||'#9e9387';
+    const btn = document.createElement('button');
+    btn.style.cssText = 'padding:.28rem .7rem;border-radius:100px;border:1px solid '+(_ankiFilter===m?c:'var(--bdr)')+';background:'+(_ankiFilter===m?c+'22':'transparent')+';color:'+(_ankiFilter===m?c:'var(--mut)')+';font-family:Syne,sans-serif;font-size:.72rem;font-weight:600;cursor:pointer';
+    btn.textContent = ML[m]||m;
+    btn.onclick = () => filterAnki(m);
+    el.appendChild(btn);
+  });
+}
+
+function filterAnki(mat) {
+  _ankiFilter = mat;
+  renderAnkiMatFilters();
+  renderAnkiList();
+}
+
 function renderAnkiList() {
-  const el = document.getElementById('anki-list'); if(!el) return;
-  const today = tstr();
-  const due = ankiCards.filter(c => !c.nextReview || c.nextReview <= today);
-  const el2 = document.getElementById('anki-due-count');
-  if(el2) el2.textContent = due.length + ' carte(s) a revoir';
-  el.innerHTML = ankiCards.slice(0,10).map(c => {
-    const col = MC[c.mat]||'#9e9387';
-    return `<div class="ti"><span class="mbadge" style="background:${col}22;color:${col}">${ML[c.mat]||c.mat}</span><span class="ttxt">${c.q}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--mut)">${c.status||'nouveau'}</span></div>`;
+  const cards = getAnkiCards();
+  const filtered = _ankiFilter ? cards.filter(c=>c.mat===_ankiFilter) : cards;
+  const el = document.getElementById('anki-list');
+  const emptyEl = document.getElementById('anki-empty');
+  if(!el) return;
+  if(!filtered.length) {
+    el.innerHTML='';
+    if(emptyEl) emptyEl.style.display='block';
+    return;
+  }
+  if(emptyEl) emptyEl.style.display='none';
+  const today = todayISO();
+  el.innerHTML = filtered.map(card => {
+    const c = MC[card.mat]||'#9e9387';
+    const isDue = !card.nextReview || card.nextReview <= today;
+    const statusLabel = card.status==='facile'?'🌟 Facile':card.status==='moyen'?'😐 Moyen':card.status==='difficile'?'😰 Difficile':'🆕 Nouveau';
+    return '<div style="display:flex;align-items:center;gap:.65rem;padding:.65rem .9rem;background:var(--sur);border:1px solid '+(isDue?c+'66':'var(--bdr)')+';border-radius:8px;border-left:3px solid '+c+';animation:fu .18s ease">'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-weight:700;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+card.q+'</div>'
+      +'<div style="font-size:.74rem;color:var(--mut);margin-top:.12rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+card.a.substring(0,60)+'</div>'
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;flex-shrink:0">'
+      +'<span style="font-family:IBM Plex Mono,monospace;font-size:.56rem;padding:.12rem .38rem;border-radius:3px;background:'+c+'22;color:'+c+'">'+(ML[card.mat]||card.mat||'')+'</span>'
+      +'<span style="font-family:IBM Plex Mono,monospace;font-size:.55rem;color:var(--mut)">'+statusLabel+'</span>'
+      +'</div>'
+      +'<button onclick="delAnkiCard('+card.id+')" style="background:none;border:none;color:var(--mut);cursor:pointer;font-size:.8rem;padding:.2rem .35rem;border-radius:4px;opacity:0;transition:opacity .15s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">✕</button>'
+      +'</div>';
   }).join('');
 }
-function startAnkiSession() {
-  const today = tstr();
-  ankiSession = ankiCards.filter(c => !c.nextReview || c.nextReview <= today).slice(0,20);
-  if(!ankiSession.length) { notify('Aucune carte a revoir ! Reviens demain.'); return; }
-  ankiIdx = 0;
-  showAnkiCard();
-  const modeEl = document.getElementById('anki-session-mode');
-  const listEl = document.getElementById('anki-list-mode');
-  if(modeEl) modeEl.style.display = 'block';
-  if(listEl) listEl.style.display = 'none';
-}
-function showAnkiCard() {
-  const card = ankiSession[ankiIdx];
-  if(!card) { endAnkiSession(); return; }
-  const qEl = document.getElementById('anki-q'), aEl = document.getElementById('anki-a');
-  if(qEl) qEl.textContent = card.q;
-  if(aEl) aEl.textContent = card.a;
-  const fcEl = document.getElementById('anki-fc');
-  if(fcEl) fcEl.classList.remove('ia-flipped');
-  const ctrEl = document.getElementById('anki-ctr');
-  if(ctrEl) ctrEl.textContent = (ankiIdx+1)+'/'+ankiSession.length;
-}
-function flipAnkiCard() { const el=document.getElementById('anki-fc'); if(el) el.classList.toggle('ia-flipped'); }
-function rateAnkiCard(rating) {
-  const card = ankiSession[ankiIdx]; if(!card) return;
-  const orig = ankiCards.find(c => c.id === card.id);
-  if(orig) {
-    orig.status = rating <= 2 ? 'difficile' : rating === 3 ? 'moyen' : 'facile';
-    const days = [1,1,3,7,14][rating-1] || 1;
-    const next = new Date(); next.setDate(next.getDate()+days);
-    orig.nextReview = next.toLocaleDateString('fr-FR');
-    localStorage.setItem('ect-flash', JSON.stringify(ankiCards)); if(CLOUD && CLOUD.enabled) cloudPush('ect-flash', JSON.stringify(ankiCards));
-  }
-  ankiIdx++;
-  if(ankiIdx < ankiSession.length) showAnkiCard();
-  else endAnkiSession();
-}
-function endAnkiSession() {
-  notify('Session terminee ! '+ankiSession.length+' cartes revues.');
-  const modeEl = document.getElementById('anki-session-mode');
-  const listEl = document.getElementById('anki-list-mode');
-  if(modeEl) modeEl.style.display = 'none';
-  if(listEl) listEl.style.display = 'block';
+
+function delAnkiCard(id) {
+  const cards = getAnkiCards().filter(c=>c.id!==id);
+  saveAnkiCards(cards);
+  renderAnkiStats();
+  renderAnkiMatFilters();
   renderAnkiList();
 }
+
+function startAnkiSession() {
+  const cards = getAnkiCards();
+  const today = todayISO();
+  let session = cards.filter(c => !c.nextReview || c.nextReview <= today);
+  if(_ankiFilter) session = session.filter(c=>c.mat===_ankiFilter);
+  session = session.slice(0, 20);
+  if(!session.length) { notify('Aucune carte a revoir ! Reviens demain.'); return; }
+  window._ankiSession = session;
+  window._ankiIdx = 0;
+  document.getElementById('anki-session-mode').style.display='block';
+  document.getElementById('anki-list-mode').style.display='none';
+  showAnkiCard();
+}
+
+function showAnkiCard() {
+  const card = window._ankiSession[window._ankiIdx];
+  if(!card) { endAnkiSession(); return; }
+  const total = window._ankiSession.length;
+  const current = window._ankiIdx + 1;
+
+  document.getElementById('anki-q').textContent = card.q;
+  document.getElementById('anki-a').textContent = card.a;
+
+  const matLbl = document.getElementById('anki-mat-lbl');
+  if(matLbl) matLbl.textContent = ML[card.mat]||card.mat||'';
+
+  const prog = document.getElementById('anki-prog-bar');
+  const txt = document.getElementById('anki-prog-txt');
+  if(prog) prog.style.width = Math.round((current-1)/total*100)+'%';
+  if(txt) txt.textContent = current+'/'+total;
+
+  // Reset card flip
+  const cardEl = document.getElementById('anki-card');
+  if(cardEl) cardEl.style.transform='rotateY(0deg)';
+  const rateEl = document.getElementById('anki-rate-btns');
+  if(rateEl) rateEl.style.display='none';
+}
+
+function flipAnkiCard() {
+  const cardEl = document.getElementById('anki-card');
+  if(!cardEl) return;
+  const isFlipped = cardEl.style.transform === 'rotateY(180deg)';
+  cardEl.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
+  const rateEl = document.getElementById('anki-rate-btns');
+  if(rateEl) rateEl.style.display = isFlipped ? 'none' : 'flex';
+}
+
+function rateAnki(days) {
+  const card = window._ankiSession[window._ankiIdx];
+  if(!card) return;
+  const allCards = getAnkiCards();
+  const orig = allCards.find(c=>c.id===card.id);
+  if(orig) {
+    orig.status = days<=1?'difficile':days<=3?'moyen':days<=7?'bien':'facile';
+    const next = new Date(); next.setDate(next.getDate()+days);
+    orig.nextReview = next.toISOString().split('T')[0];
+    saveAnkiCards(allCards);
+  }
+  window._ankiIdx++;
+  if(window._ankiIdx < window._ankiSession.length) showAnkiCard();
+  else endAnkiSession();
+}
+
+function endAnkiSession() {
+  const done = window._ankiIdx || 0;
+  notify(done+' cartes revues !');
+  document.getElementById('anki-session-mode').style.display='none';
+  document.getElementById('anki-list-mode').style.display='block';
+  renderAnkiStats();
+  renderAnkiList();
+}
+
 function saveNewFlashcard() {
   const q = document.getElementById('new-fc-q')?.value.trim();
   const a = document.getElementById('new-fc-a')?.value.trim();
   const m = document.getElementById('new-fc-mat')?.value;
   if(!q||!a) { notify('Question et reponse requises'); return; }
-  ankiCards.push({id:Date.now(), mat:m, q, a, status:'nouveau', nextReview:tstr()});
-  localStorage.setItem('ect-flash', JSON.stringify(ankiCards)); if(CLOUD && CLOUD.enabled) cloudPush('ect-flash', JSON.stringify(ankiCards));
+  const cards = getAnkiCards();
+  cards.unshift({id:Date.now(), mat:m, q, a, status:'nouveau', nextReview:todayISO()});
+  saveAnkiCards(cards);
   document.getElementById('new-fc-q').value='';
   document.getElementById('new-fc-a').value='';
   closeOv('ov-new-fc');
+  renderAnkiStats();
+  renderAnkiMatFilters();
   renderAnkiList();
   notify('Carte ajoutee !');
 }
