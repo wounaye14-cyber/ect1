@@ -826,9 +826,10 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
 <div class="page" id="page-anki">
   <div class="ph">
     <div class="ph-t">🃏 Flashcards</div>
-    <div style="display:flex;gap:.4rem">
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap">
       <button class="btn btn-dk btn-sm" onclick="openOv('ov-new-fc')">+ Carte</button>
       <button class="btn btn-gh btn-sm" onclick="startAnkiSession()">▶ Réviser</button>
+      <button class="btn btn-gh btn-sm" onclick="openOv('ov-import-fc')">⬆️ Importer</button>
     </div>
   </div>
 
@@ -1241,6 +1242,70 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
     <div class="mfoot">
       <button class="btn btn-gh" onclick="closeOv('ov-reminder')">Annuler</button>
       <button class="btn btn-dk" onclick="saveReminder()">Créer</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORT FLASHCARDS OVERLAY -->
+<div class="ov" id="ov-import-fc" onclick="if(event.target===this)closeOv('ov-import-fc')">
+  <div class="modal" style="max-width:560px">
+    <div class="mtitle">⬆️ Importer des flashcards</div>
+
+    <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
+      <div style="font-weight:700;font-size:.86rem;margin-bottom:.5rem">📱 Depuis Quizlet</div>
+      <div style="font-size:.78rem;color:var(--mut);line-height:1.7;margin-bottom:.6rem">
+        Dans Quizlet → ton set → <strong>···</strong> → <strong>Exporter</strong><br>
+        Format : <code style="background:var(--sur);padding:.1rem .3rem;border-radius:3px">Tabulation entre terme et définition, Retour chariot entre les cartes</code>
+      </div>
+    </div>
+
+    <div style="background:var(--bg);border-radius:8px;padding:1rem;margin-bottom:1rem;border:1px solid var(--bdr)">
+      <div style="font-weight:700;font-size:.86rem;margin-bottom:.5rem">📱 Depuis AngloApp ou autre app</div>
+      <div style="font-size:.78rem;color:var(--mut);line-height:1.7;margin-bottom:.6rem">
+        Exporte en CSV ou copie-colle tes cartes.<br>
+        Format accepté : <code style="background:var(--sur);padding:.1rem .3rem;border-radius:3px">Question ; Réponse</code> (une carte par ligne)
+      </div>
+    </div>
+
+    <div class="mf">
+      <label>Matière pour ces cartes</label>
+      <select id="imp-fc-mat">
+        <option value="maths">Maths</option>
+        <option value="droit">Droit</option>
+        <option value="eco">Économie</option>
+        <option value="management">Management</option>
+        <option value="anglais">Anglais</option>
+        <option value="culture">Culture G.</option>
+        <option value="philo">Philo</option>
+        <option value="allemand">Allemand</option>
+      </select>
+    </div>
+
+    <div class="mf">
+      <label>Séparateur entre question et réponse</label>
+      <select id="imp-fc-sep">
+        <option value="	">Tabulation (Quizlet par défaut)</option>
+        <option value=";">Point-virgule ;</option>
+        <option value=",">Virgule ,</option>
+        <option value=" - ">Tiret  -  </option>
+      </select>
+    </div>
+
+    <div class="mf">
+      <label>📄 Fichier (.txt, .csv)</label>
+      <input type="file" id="imp-fc-file" accept=".txt,.csv" style="font-size:.8rem">
+    </div>
+
+    <div class="mf">
+      <label>✏️ Ou colle directement ici</label>
+      <textarea id="imp-fc-text" rows="6" placeholder="Question 1	Réponse 1&#10;Question 2	Réponse 2&#10;..."></textarea>
+    </div>
+
+    <div id="imp-fc-result" style="margin:.5rem 0;font-size:.82rem;font-weight:600"></div>
+
+    <div class="mfoot">
+      <button class="btn btn-gh" onclick="closeOv('ov-import-fc')">Fermer</button>
+      <button class="btn btn-dk" onclick="importFlashcards()">Importer</button>
     </div>
   </div>
 </div>
@@ -1823,71 +1888,69 @@ function saveCours(){
   closeOv('ov-cours');renderCours();
 }
 function renderCours(){
-  const el=document.getElementById('cours-by-mat');if(!el)return;
+  const el=document.getElementById('cours-by-mat');
+  if(!el)return;
   if(!S.cours.length){
     el.innerHTML='<div class="card" style="text-align:center;padding:2rem;color:var(--mut)">Aucun cours. Clique sur <strong>+ Ajouter un cours</strong> pour commencer.</div>';
     return;
   }
 
-  function coursCard(co, c) {
-    const col = c || 'var(--bdr)';
-    const div = document.createElement('div');
-    div.className = 'cours-item';
-    div.style.setProperty('--ci', col||'var(--bdr)');
-    div.innerHTML = '<div class="cours-item-title" style="cursor:pointer">'+co.title+'</div>'
-      +'<div class="cours-item-meta" style="justify-content:space-between;flex-wrap:wrap">'
-        +'<div style="display:flex;gap:.5rem"><span>'+co.date+'</span><span>'+(co.pages||1)+' page'+((co.pages||1)>1?'s':'')+'</span></div>'
-        +'<div style="display:flex;gap:.35rem">'
-          +'<button class="btn-edit-cours btn-sm" style="font-family:Syne,sans-serif;font-size:.65rem;font-weight:700;padding:.18rem .5rem;border-radius:4px;border:1px solid var(--bdr);background:var(--sur);cursor:pointer;color:var(--txt)">✏️ Modifier</button>'
-          +'<button class="btn-del-cours btn-sm" style="font-family:Syne,sans-serif;font-size:.65rem;font-weight:700;padding:.18rem .5rem;border-radius:4px;border:1px solid rgba(214,79,58,.3);background:rgba(214,79,58,.08);cursor:pointer;color:var(--droit)">🗑️</button>'
+  function makeCard(co,col){
+    const c=col||'var(--bdr)';
+    return '<div class="cours-item" style="--ci:'+c+';cursor:default">'
+      +'<div class="ci-title" data-id="'+co.id+'" style="cursor:pointer;font-weight:700;font-size:.88rem;line-height:1.3;margin-bottom:.3rem">'+co.title+'</div>'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.35rem">'
+        +'<div style="font-family:IBM Plex Mono,monospace;font-size:.58rem;color:var(--mut);display:flex;gap:.5rem">'
+          +'<span>'+co.date+'</span>'
+          +'<span>'+(co.pages||1)+'p</span>'
+        +'</div>'
+        +'<div style="display:flex;gap:.3rem">'
+          +'<button class="ci-edit" data-id="'+co.id+'" style="font-family:Syne,sans-serif;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;border:1px solid var(--bdr);background:var(--sur);cursor:pointer;color:var(--txt)">✏️</button>'
+          +'<button class="ci-del" data-id="'+co.id+'" style="font-family:Syne,sans-serif;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;border:1px solid rgba(214,79,58,.25);background:rgba(214,79,58,.07);cursor:pointer;color:var(--droit)">🗑️</button>'
         +'</div>'
       +'</div>'
-      +'<div class="cours-item-preview" style="cursor:pointer">'+co.content.substring(0,120)+'</div>';
-    div.querySelector('.cours-item-title').onclick = () => openCoursViewer(co.id);
-    div.querySelector('.cours-item-preview').onclick = () => openCoursViewer(co.id);
-    div.querySelector('.btn-edit-cours').onclick = () => editCours(co.id);
-    div.querySelector('.btn-del-cours').onclick = () => { if(confirm('Supprimer ce cours ?')) delCours(co.id); };
-    return div.outerHTML;
+      +'<div class="ci-preview" data-id="'+co.id+'" style="font-family:Lora,serif;font-size:.76rem;color:var(--mut);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer">'+co.content.substring(0,120)+'</div>'
+    +'</div>';
   }
 
-  const mats = Object.keys(MC);
-  let html = '';
-  mats.forEach(m => {
-    const cs = S.cours.filter(c => c.mat===m);
-    if(!cs.length) return;
-    const col = MC[m];
-    html += '<div class="cours-mat-section">'
+  const mats=Object.keys(MC);
+  let html='';
+  mats.forEach(m=>{
+    const cs=S.cours.filter(c=>c.mat===m);
+    if(!cs.length)return;
+    const col=MC[m];
+    html+='<div class="cours-mat-section">'
       +'<div class="cours-mat-title">'
         +'<div class="cours-mat-dot" style="background:'+col+'"></div>'
         +'<div class="cours-mat-name">'+(ML[m]||m)+'</div>'
         +'<div class="cours-mat-count">'+cs.length+' cours</div>'
       +'</div>'
-      +'<div class="cours-list">'+cs.map(co=>coursCard(co,col)).join('')+'</div>'
+      +'<div class="cours-list">'+cs.map(co=>makeCard(co,col)).join('')+'</div>'
     +'</div>';
   });
-
-  // Autres matières
-  const others = S.cours.filter(c => !MC[c.mat]);
-  if(others.length) {
-    html += '<div class="cours-mat-section">'
+  const others=S.cours.filter(c=>!MC[c.mat]);
+  if(others.length){
+    html+='<div class="cours-mat-section">'
       +'<div class="cours-mat-title"><div class="cours-mat-dot" style="background:var(--mut)"></div><div class="cours-mat-name">Autres</div></div>'
-      +'<div class="cours-list">'+others.map(co=>coursCard(co,null)).join('')+'</div>'
+      +'<div class="cours-list">'+others.map(co=>makeCard(co,null)).join('')+'</div>'
     +'</div>';
   }
-  el.innerHTML = html;
+  el.innerHTML=html;
+
+  // Délégation d'événements — 1 seul listener sur le conteneur
+  el.onclick=function(e){
+    const openEl=e.target.closest('.ci-title,.ci-preview');
+    const editEl=e.target.closest('.ci-edit');
+    const delEl =e.target.closest('.ci-del');
+    if(openEl){ openCoursViewer(parseInt(openEl.dataset.id)); }
+    if(editEl){ editCours(parseInt(editEl.dataset.id)); }
+    if(delEl){
+      if(confirm('Supprimer ce cours ?')) delCours(parseInt(delEl.dataset.id));
+    }
+  };
 }
-function openCoursViewer(id){
-  const c=S.cours.find(x=>x.id===id);if(!c)return;
-  S.curCours=c;
-  document.getElementById('cv-mat').textContent=(ML[c.mat]||c.mat).toUpperCase();
-  document.getElementById('cv-mat').style.color=MC[c.mat]||'var(--mut)';
-  document.getElementById('cv-title').textContent=c.title;
-  document.getElementById('cv-meta').textContent=c.date+' · '+(c.pages||1)+' page(s)';
-  const cvBody=document.getElementById('cv-body');if(cvBody){cvBody.innerHTML=renderMarkdown(c.content);}
-  document.getElementById('ia-output').innerHTML='';
-  document.getElementById('cours-viewer-section').style.display='block';
-  document.getElementById('cours-viewer-section').scrollIntoView({behavior:'smooth'});
-}
+
+
 function closeCoursViewer(){document.getElementById('cours-viewer-section').style.display='none';S.curCours=null;}
 function genFromCours(type){
   if(!S.curCours){notify('Ouvre un cours dabord');return;}
@@ -2858,6 +2921,55 @@ function renderMarkdown(text) {
   html = html.replace(/\n/g, '<br>');
 
   return html;
+}
+
+
+// ════════════════════════════════════════════
+// IMPORT FLASHCARDS (Quizlet, AngloApp, CSV)
+// ════════════════════════════════════════════
+function importFlashcards(){
+  const mat   = document.getElementById('imp-fc-mat')?.value || 'anglais';
+  const sep   = document.getElementById('imp-fc-sep')?.value || '\t';
+  const file  = document.getElementById('imp-fc-file')?.files[0];
+  const pasted= document.getElementById('imp-fc-text')?.value.trim();
+  const resEl = document.getElementById('imp-fc-result');
+
+  function process(text){
+    const lines = text.split('\n').map(l=>l.trim()).filter(l=>l.length>0);
+    const cards = getAnkiCards();
+    let count = 0;
+    lines.forEach(line => {
+      const parts = line.split(sep);
+      if(parts.length >= 2){
+        const q = parts[0].trim();
+        const a = parts.slice(1).join(sep).trim();
+        if(q && a){
+          cards.unshift({id:Date.now()+Math.random(), mat, q, a, status:'nouveau', nextReview:todayISO()});
+          count++;
+        }
+      }
+    });
+    if(count > 0){
+      saveAnkiCards(cards);
+      renderAnkiStats();
+      renderAnkiMatFilters();
+      renderAnkiList();
+      if(resEl){ resEl.style.color='var(--management)'; resEl.textContent=count+' cartes importees !';}
+      notify(count+' flashcards importees !');
+    } else {
+      if(resEl){ resEl.style.color='var(--droit)'; resEl.textContent='Aucune carte trouvee. Verifie le separateur.';}
+    }
+  }
+
+  if(file){
+    const r = new FileReader();
+    r.onload = e => process(e.target.result);
+    r.readAsText(file, 'UTF-8');
+  } else if(pasted){
+    process(pasted);
+  } else {
+    notify('Choisis un fichier ou colle du texte');
+  }
 }
 
 // ══════════════════════════════════════════════════
