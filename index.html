@@ -1786,60 +1786,40 @@ function saveFiche(){const title=document.getElementById('fi-title').value.trim(
 // COURS (bibliothèque par matière)
 // ══════════════════════════════════════════════════
 function loadCoursFile(input){
-  const file=input.files[0];if(!file)return;
-  const status=document.getElementById('nc-file-status');
-  if(status){status.style.display='block';status.textContent='Chargement...';}
-  // Any file that's a PDF
+  const file = input.files[0];
+  if(!file) return;
+  const status = document.getElementById('nc-file-status');
   const isPDF = file.type==='application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+
   if(isPDF){
-    // Read PDF as base64 and send to Claude API
-    const r=new FileReader();
-    r.onload=async e=>{
-      const base64=e.target.result.split(',')[1];
-      if(status)status.textContent='PDF detecte - extraction du texte via IA...';
-      try{
-        const res=await fetch('https://api.anthropic.com/v1/messages',{
-          method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,
-            messages:[{role:'user',content:[
-              {type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},
-              {type:'text',text:'Extrais et retranscris integralement le contenu de ce document PDF. Garde toute la structure, les titres, les listes. Reponds uniquement avec le contenu extrait, sans commentaire.'}
-            ]}]})
-        });
-        const data=await res.json();
-        const text=data.content?.map(b=>b.text||'').join('');
-        document.getElementById('nc-content').value=text;
-        document.getElementById('nc-title').value=file.name.replace(/\.[^.]+$/,'');
-        if(status)status.textContent='PDF extrait avec succes ! '+text.length+' caracteres';
-        notify('PDF importe !');
-      }catch(e){
-        // Try fallback: read as text
-        const fr2=new FileReader();
-        fr2.onload=e2=>{
-          const txt=e2.target.result;
-          if(txt&&txt.length>50){
-            document.getElementById('nc-content').value=txt;
-            document.getElementById('nc-title').value=file.name.replace(/\.[^.]+$/,'');
-            if(status){status.style.color='var(--management)';status.textContent='Texte extrait: '+txt.length+' caracteres';}
-            notify('Cours charge !');
-          } else {
-            if(status){status.style.color='var(--anglais)';status.textContent='PDF protege - ouvre-le, fais Ctrl+A puis Ctrl+C et colle dans la zone de texte.';}
-          }
-        };
-        fr2.readAsText(file);
-      }
-    };
-    r.readAsDataURL(file);
-  } else {
-    const r=new FileReader();
-    r.onload=e=>{
-      document.getElementById('nc-content').value=e.target.result;
-      document.getElementById('nc-title').value=file.name.replace(/\.[^.]+$/,'');
-      if(status)status.textContent='Fichier charge - '+e.target.result.length+' caracteres';
-      notify('Fichier charge !');
-    };
-    r.readAsText(file);
+    // PDF cannot be read as raw text — show instructions
+    if(status){
+      status.style.display='block';
+      status.style.color='var(--anglais)';
+      status.innerHTML='📄 <strong>PDF detecte</strong> — Le PDF ne peut pas etre lu automatiquement.<br>Pour importer : ouvre le PDF → <strong>Ctrl+A</strong> → <strong>Ctrl+C</strong> → colle dans la zone de texte.';
+    }
+    input.value='';
+    document.getElementById('nc-title').value = file.name.replace(/\.[^.]+$/, '');
+    return;
   }
+
+  // Text files (.txt, .md etc.)
+  if(status){ status.style.display='block'; status.textContent='Chargement...'; }
+  const r = new FileReader();
+  r.onload = e => {
+    const text = e.target.result;
+    document.getElementById('nc-content').value = text;
+    document.getElementById('nc-title').value = file.name.replace(/\.[^.]+$/, '');
+    if(status){
+      status.style.color='var(--management)';
+      status.textContent='Fichier charge : '+text.length+' caracteres';
+    }
+    notify('Fichier charge !');
+  };
+  r.onerror = () => {
+    if(status){ status.style.color='var(--droit)'; status.textContent='Erreur lecture fichier'; }
+  };
+  r.readAsText(file, 'UTF-8');
 }
 
 async function loadCoursAudio(input){
@@ -1951,7 +1931,14 @@ function renderCours(){
 }
 
 
-function closeCoursViewer(){document.getElementById('cours-viewer-section').style.display='none';S.curCours=null;}
+function closeCoursViewer(){
+  const el = document.getElementById('cours-viewer-section');
+  if(el) el.style.display='none';
+  S.curCours = null;
+  // Reset IA output
+  const out = document.getElementById('ia-output');
+  if(out) out.innerHTML='';
+}
 function genFromCours(type){
   if(!S.curCours){notify('Ouvre un cours dabord');return;}
   if(type==='all'){
