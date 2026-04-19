@@ -274,10 +274,26 @@ main{padding:2rem 2.5rem;max-width:1000px}
 }
 @media(max-width:768px){
   .app{grid-template-columns:1fr}
+  main{padding:1rem !important}
+  .ph{margin-bottom:1.25rem}
+  .ph-t{font-size:1.5rem}
+  .card{padding:1rem}
+  .g2{grid-template-columns:1fr 1fr}
+  .controls-grid{grid-template-columns:1fr 1fr}
+  .fg{grid-template-columns:1fr}
+  .cours-list{grid-template-columns:1fr}
+  .modal{padding:1.25rem;max-height:95vh;border-radius:12px}
+  .btn{padding:.55rem .9rem;font-size:.8rem}
+  .btn-sm{padding:.35rem .65rem;font-size:.72rem}
   .schg{font-size:.8rem}
   .schev{font-size:.7rem;padding:.25rem .5rem}
   .schkh{font-size:.68rem;padding:.22rem .45rem}
   .scht{font-size:.55rem;padding-top:4px}
+  .tblk{padding:1.25rem}
+  .tblk-g{font-size:1.2rem}
+  .smcn{font-size:1.6rem}
+  .nb{padding:.5rem .65rem;font-size:.78rem}
+  .brand-n{font-size:1.2rem}
   aside{position:fixed;left:-240px;z-index:200;transition:left .28s;width:230px;height:100vh;top:0}
   aside.open{left:0}
   main{padding:1.1rem}
@@ -336,6 +352,7 @@ main{padding:2rem 2.5rem;max-width:1000px}
     <button class="nb" onclick="goTo('calendrier',this)"><span class="nd" style="background:#06b6d4"></span>📅 Calendrier</button>
     <button class="nb" onclick="goTo('anki',this)"><span class="nd" style="background:#f59e0b"></span>🃏 Flashcards</button>
     <button class="nb" onclick="goTo('bienetre',this)"><span class="nd" style="background:#ec4899"></span>😴 Bien-être</button>
+    <button class="nb" onclick="goTo('actu',this)"><span class="nd" style="background:#ef4444"></span>📰 Actualités</button>
     <button class="nb settings-nb" onclick="goTo('sync',this)"><span class="nd" style="background:#0891b2"></span>☁️ Synchronisation</button>
     <button class="nb settings-nb" onclick="goTo('settings',this)"><span class="nd" style="background:#f59e0b"></span>⚙️ Paramètres</button>
   </nav>
@@ -714,6 +731,10 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
       </div>
     </div>
   </div>
+  <div class="card" style="margin-top:1rem">
+    <div class="clbl">Mes événements</div>
+    <div id="cal-events-list"></div>
+  </div>
 </div>
 
 <!-- NOTES -->
@@ -795,6 +816,8 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
       <button class="btn btn-gh btn-sm" onclick="calNav(-1)">←</button>
       <div class="ph-t" id="cal-title">Mars 2026</div>
       <button class="btn btn-gh btn-sm" onclick="calNav(1)">→</button>
+    </div>
+    <button class="btn btn-dk btn-sm" onclick="openOv('ov-cal-event')">+ Événement</button>
     </div>
     <button class="btn btn-gh btn-sm" onclick="calGoToday()">Aujourd'hui</button>
   </div>
@@ -999,6 +1022,38 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
   <div class="card">
     <div class="clbl" style="cursor:pointer" onclick="var n=this.nextElementSibling;n.style.display=n.style.display==='none'?'block':'none'">Passés ▾</div>
     <div id="rem-past" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ACTUALITÉS -->
+<div class="page" id="page-actu">
+  <div class="ph">
+    <div class="ph-t">📰 Actualités</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut);text-transform:uppercase;letter-spacing:1px" id="actu-last-update"></div>
+  </div>
+
+  <!-- Catégorie tabs -->
+  <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.25rem" id="actu-tabs">
+    <button class="btn btn-dk btn-sm actu-tab" onclick="setActuTab('eco')" data-tab="eco">📊 Éco mondiale</button>
+    <button class="btn btn-gh btn-sm actu-tab" onclick="setActuTab('bc')" data-tab="bc">🏦 BCE / FED</button>
+    <button class="btn btn-gh btn-sm actu-tab" onclick="setActuTab('en')" data-tab="en">🇬🇧 Presse anglophone</button>
+    <button class="btn btn-gh btn-sm actu-tab" onclick="setActuTab('eu')" data-tab="eu">🇪🇺 Europe / UE</button>
+  </div>
+
+  <!-- Loading -->
+  <div id="actu-loading" style="text-align:center;padding:2rem;display:none">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--mut);letter-spacing:1px" id="actu-load-txt">Chargement des actualités...</div>
+    <div style="margin:1rem auto 0;height:3px;background:var(--bdr);border-radius:3px;overflow:hidden;max-width:280px">
+      <div id="actu-load-bar" style="height:100%;background:var(--droit);width:0%;transition:width .4s;border-radius:3px"></div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div id="actu-content"></div>
+
+  <!-- Sources info -->
+  <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--bdr);font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--mut)">
+    Sources : The Economist, Financial Times, Les Echos, Reuters, BBC Economy — Mise à jour IA en temps réel
   </div>
 </div>
 
@@ -1306,6 +1361,45 @@ CREATE TABLE IF NOT EXISTS ect_data (<br>
     <div class="mfoot">
       <button class="btn btn-gh" onclick="closeOv('ov-import-fc')">Fermer</button>
       <button class="btn btn-dk" onclick="importFlashcards()">Importer</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR EVENT OVERLAY -->
+<div class="ov" id="ov-cal-event" onclick="if(event.target===this)closeOv('ov-cal-event')">
+  <div class="modal">
+    <div class="mtitle">📅 Nouvel événement</div>
+    <div class="mf"><label>Titre</label>
+      <input id="cal-ev-title" placeholder="Ex: Vacances, Révisions intensives, Sortie...">
+    </div>
+    <div class="mf"><label>Date de début</label>
+      <input id="cal-ev-start" type="date">
+    </div>
+    <div class="mf"><label>Date de fin (optionnel)</label>
+      <input id="cal-ev-end" type="date">
+    </div>
+    <div class="mf"><label>Type</label>
+      <select id="cal-ev-type">
+        <option value="vacances">🏖️ Vacances</option>
+        <option value="revision">📚 Révisions</option>
+        <option value="perso">🎉 Personnel</option>
+        <option value="important">⚠️ Important</option>
+        <option value="sport">🏃 Sport</option>
+      </select>
+    </div>
+    <div class="mf"><label>Couleur</label>
+      <select id="cal-ev-color">
+        <option value="#6366f1">Violet</option>
+        <option value="#22c55e">Vert</option>
+        <option value="#f59e0b">Orange</option>
+        <option value="#ef4444">Rouge</option>
+        <option value="#06b6d4">Bleu</option>
+        <option value="#ec4899">Rose</option>
+      </select>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-gh" onclick="closeOv('ov-cal-event')">Annuler</button>
+      <button class="btn btn-dk" onclick="saveCalEvent()">Ajouter</button>
     </div>
   </div>
 </div>
@@ -1917,16 +2011,15 @@ function renderCours(){
   }
   el.innerHTML=html;
 
-  // Délégation d'événements — 1 seul listener sur le conteneur
+  // Délégation d'événements
   el.onclick=function(e){
-    const openEl=e.target.closest('.ci-title,.ci-preview');
-    const editEl=e.target.closest('.ci-edit');
-    const delEl =e.target.closest('.ci-del');
+    const editEl = e.target.closest('.ci-edit');
+    const delEl  = e.target.closest('.ci-del');
+    const openEl = e.target.closest('.ci-title,.ci-preview');
+    // Edit/delete have priority — stop propagation
+    if(editEl){ e.stopPropagation(); editCours(parseInt(editEl.dataset.id)); return; }
+    if(delEl){  e.stopPropagation(); if(confirm('Supprimer ce cours ?')) delCours(parseInt(delEl.dataset.id)); return; }
     if(openEl){ openCoursViewer(parseInt(openEl.dataset.id)); }
-    if(editEl){ editCours(parseInt(editEl.dataset.id)); }
-    if(delEl){
-      if(confirm('Supprimer ce cours ?')) delCours(parseInt(delEl.dataset.id));
-    }
   };
 }
 
@@ -2959,6 +3052,204 @@ function importFlashcards(){
   }
 }
 
+
+// ════════════════════════════════════════
+// CALENDRIER — Événements personnels
+// ════════════════════════════════════════
+function saveCalEvent(){
+  const title = document.getElementById('cal-ev-title')?.value.trim();
+  const start = document.getElementById('cal-ev-start')?.value;
+  const end   = document.getElementById('cal-ev-end')?.value || start;
+  const type  = document.getElementById('cal-ev-type')?.value || 'perso';
+  const color = document.getElementById('cal-ev-color')?.value || '#6366f1';
+  if(!title || !start){ notify('Titre et date requis'); return; }
+  const calEvs = ld('ect-cal-events', []);
+  calEvs.push({id:Date.now(), title, start, end, type, color});
+  sv('ect-cal-events', calEvs);
+  document.getElementById('cal-ev-title').value='';
+  document.getElementById('cal-ev-start').value='';
+  document.getElementById('cal-ev-end').value='';
+  closeOv('ov-cal-event');
+  renderCal();
+  notify('Événement ajouté !');
+}
+
+// Override renderCal to show personal events
+const _origRenderCal = renderCal;
+function renderCal(){
+  const el = document.getElementById('cal-grid'); if(!el) return;
+  const year = calDate.getFullYear(), month = calDate.getMonth();
+  const lbl = document.getElementById('cal-month-lbl') || document.getElementById('cal-title');
+  const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  if(lbl) lbl.textContent = MONTHS_FR[month]+' '+year;
+  const first = new Date(year, month, 1);
+  const last  = new Date(year, month+1, 0);
+  const startDay = (first.getDay()+6)%7;
+  const days = ['L','M','M','J','V','S','D'];
+  let html = days.map(d=>`<div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-align:center;font-weight:600;color:var(--mut);padding:.4rem">${d}</div>`).join('');
+  for(let i=0;i<startDay;i++) html+='<div></div>';
+  const calEvs = ld('ect-cal-events', []);
+  for(let d=1;d<=last.getDate();d++){
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = dateStr === todayISO();
+    const hasTasks = S.tasks.some(t => {
+      const parts = t.date.split('/');
+      return parts.length===3 && `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`===dateStr;
+    });
+    const hasDST    = S.dsts.some(x => x.date===dateStr);
+    const hasKh     = S.kholles.some(k => k.date===dateStr);
+    const hasRem    = S.reminders.some(r => r.date===dateStr);
+    const calEv     = calEvs.filter(e => e.start<=dateStr && e.end>=dateStr);
+    const hasCalEv  = calEv.length > 0;
+    const calColor  = hasCalEv ? calEv[0].color : null;
+    html += `<div onclick="calDayClick('${dateStr}')" style="padding:.3rem;text-align:center;border-radius:6px;cursor:pointer;min-height:42px;border:1px solid ${isToday?'var(--txt)':'transparent'};background:${isToday?'var(--txt)':hasCalEv?calColor+'18':'transparent'};color:${isToday?'#fff':'var(--txt)'};position:relative;transition:background .15s" title="${calEv.map(e=>e.title).join(', ')||''}">
+      <div style="font-weight:${isToday?'800':'500'};font-size:.84rem">${d}</div>
+      <div style="display:flex;justify-content:center;gap:2px;margin-top:2px;flex-wrap:wrap">
+        ${hasDST?`<div style="width:5px;height:5px;border-radius:50%;background:${MC.droit}"></div>`:''}
+        ${hasKh?`<div style="width:5px;height:5px;border-radius:50%;background:${MC.anglais}"></div>`:''}
+        ${hasRem?`<div style="width:5px;height:5px;border-radius:50%;background:#ec4899"></div>`:''}
+        ${hasTasks?`<div style="width:5px;height:5px;border-radius:50%;background:var(--management)"></div>`:''}
+        ${hasCalEv?`<div style="width:5px;height:5px;border-radius:50%;background:${calColor}"></div>`:''}
+      </div>
+      ${hasCalEv?`<div style="font-size:.45rem;color:${calColor};font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">${calEv[0].title}</div>`:''}
+    </div>`;
+  }
+  el.innerHTML = html;
+
+  // Show events list below calendar
+  const listEl = document.getElementById('cal-events-list');
+  if(listEl){
+    const upcoming = calEvs.filter(e => e.end >= todayISO()).sort((a,b)=>a.start.localeCompare(b.start));
+    listEl.innerHTML = upcoming.length
+      ? upcoming.map(e=>`<div style="display:flex;align-items:center;gap:.6rem;padding:.55rem .75rem;background:var(--sur);border:1px solid var(--bdr);border-left:3px solid ${e.color};border-radius:7px;margin-bottom:.3rem">
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:.85rem">${e.title}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut)">${e.start===e.end?e.start:e.start+' → '+e.end}</div>
+          </div>
+          <button onclick="delCalEvent(${e.id})" style="background:none;border:none;color:var(--mut);cursor:pointer;font-size:.8rem">✕</button>
+        </div>`).join('')
+      : '<div style="color:var(--mut);font-size:.82rem">Aucun événement à venir</div>';
+  }
+}
+
+function calDayClick(dateStr){
+  const d = document.getElementById('cal-ev-start');
+  const d2 = document.getElementById('cal-ev-end');
+  if(d) d.value = dateStr;
+  if(d2) d2.value = dateStr;
+  openOv('ov-cal-event');
+}
+
+function delCalEvent(id){
+  const evs = ld('ect-cal-events',[]).filter(e=>e.id!==id);
+  sv('ect-cal-events', evs);
+  renderCal();
+}
+
+// ════════════════════════════════════════
+// ACTUALITÉS — Fetch via Claude API
+// ════════════════════════════════════════
+let _actuTab = 'eco';
+const ACTU_PROMPTS = {
+  eco: `Tu es un expert en économie mondiale pour un étudiant en prépa ECT français. 
+Génère 6 actualités économiques mondiales RÉCENTES et importantes. Inclus : croissance mondiale, inflation, commerce international, marchés, entreprises majeures.
+Format JSON STRICT sans markdown : {"date":"${new Date().toLocaleDateString('fr-FR')}","articles":[{"titre":"...","resume":"...","source":"Reuters/FT/Bloomberg","impact":"court résumé de l impact pour la prépa ECT","tag":"PIB/Inflation/Commerce/Marchés"}]}`,
+
+  bc: `Tu es expert en politique monétaire pour prépa ECT. 
+Génère 5 actualités sur les banques centrales : décisions BCE, FED, BOE, BOJ. Taux directeurs, inflation, QE/QT, communications récentes.
+Format JSON STRICT : {"date":"${new Date().toLocaleDateString('fr-FR')}","articles":[{"titre":"...","resume":"...","source":"BCE/FED/Reuters","impact":"lien avec cours ECT","tag":"BCE/FED/Taux/Inflation"}]}`,
+
+  en: `Tu es journaliste pour un étudiant prépa ECT qui prépare ses LV1. 
+Génère 5 articles de presse anglophone récents (The Economist, Financial Times, The Telegraph, BBC, Guardian) sur économie, politique, société des pays anglophones.
+Format JSON STRICT : {"date":"${new Date().toLocaleDateString('fr-FR')}","articles":[{"titre":"...","titre_fr":"traduction française","resume_en":"...","resume_fr":"...","source":"The Economist/FT/BBC","tag":"UK/USA/Monde"}]}`,
+
+  eu: `Tu es expert en politique européenne pour prépa ECT.
+Génère 5 actualités sur l UE : décisions Commission européenne, Parlement, directives, euro, politique commerciale EU, relations internationales.
+Format JSON STRICT : {"date":"${new Date().toLocaleDateString('fr-FR')}","articles":[{"titre":"...","resume":"...","source":"Commission/Reuters/Euractiv","impact":"pertinence pour ECT","tag":"Commission/Parlement/Euro/Commerce"}]}`,
+};
+
+const ACTU_TAG_COLORS = {
+  'PIB':'#2e5fa3','Inflation':'#d64f3a','Commerce':'#3a7d5a','Marchés':'#c08a2a',
+  'BCE':'#6b4f8a','FED':'#78716c','Taux':'#8a5a2a','UK':'#2e5fa3','USA':'#d64f3a',
+  'Commission':'#6b4f8a','Parlement':'#3a7d5a','Euro':'#c08a2a'
+};
+
+function setActuTab(tab){
+  _actuTab = tab;
+  document.querySelectorAll('.actu-tab').forEach(b=>{
+    b.className = b.dataset.tab===tab ? 'btn btn-dk btn-sm actu-tab' : 'btn btn-gh btn-sm actu-tab';
+  });
+  loadActu();
+}
+
+async function loadActu(){
+  const loadEl  = document.getElementById('actu-loading');
+  const content = document.getElementById('actu-content');
+  const bar     = document.getElementById('actu-load-bar');
+  const txt     = document.getElementById('actu-load-txt');
+  if(loadEl) loadEl.style.display='block';
+  if(content) content.innerHTML='';
+  let prog=0;
+  const piv=setInterval(()=>{prog=Math.min(prog+5,88);if(bar)bar.style.width=prog+'%';},200);
+  const msgs=['Consultation des sources...','Analyse de l actualite...','Synthese en cours...'];
+  let mi=0;
+  const miv=setInterval(()=>{if(txt)txt.textContent=msgs[Math.min(mi++,msgs.length-1)];},1200);
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,
+        messages:[{role:'user',content:ACTU_PROMPTS[_actuTab]}]})
+    });
+    const data=await res.json();
+    clearInterval(piv);clearInterval(miv);
+    if(bar)bar.style.width='100%';
+    setTimeout(()=>{if(loadEl)loadEl.style.display='none';},300);
+    const raw=data.content?.map(b=>b.text||'').join('');
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    renderActu(parsed);
+    const upEl=document.getElementById('actu-last-update');
+    if(upEl)upEl.textContent=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  }catch(e){
+    clearInterval(piv);clearInterval(miv);
+    if(loadEl)loadEl.style.display='none';
+    if(content)content.innerHTML='<div class="card" style="color:var(--droit);text-align:center;padding:2rem"><div style="font-size:1.5rem;margin-bottom:.5rem">⚠️</div>Impossible de charger les actualités. Vérifie ta connexion.</div>';
+  }
+}
+
+function renderActu(data){
+  const el=document.getElementById('actu-content');
+  if(!el)return;
+  const articles=data.articles||[];
+  if(!articles.length){el.innerHTML='<div style="color:var(--mut);text-align:center;padding:2rem">Aucun article</div>';return;}
+  el.innerHTML=articles.map(a=>{
+    const tagColor=ACTU_TAG_COLORS[a.tag]||'var(--mut)';
+    const isEN=_actuTab==='en';
+    return `<div class="card" style="margin-bottom:.9rem;border-left:3px solid ${tagColor}">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:.92rem;line-height:1.35;margin-bottom:.2rem">${a.titre}</div>
+          ${isEN&&a.titre_fr?`<div style="font-size:.78rem;color:var(--mut);font-style:italic;margin-bottom:.2rem">${a.titre_fr}</div>`:''}
+        </div>
+        <div style="display:flex;gap:.3rem;flex-shrink:0;flex-wrap:wrap">
+          ${a.tag?`<span style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;padding:.15rem .45rem;border-radius:4px;background:${tagColor}22;color:${tagColor};font-weight:600">${a.tag}</span>`:''}
+          ${a.source?`<span style="font-family:'IBM Plex Mono',monospace;font-size:.56rem;padding:.15rem .45rem;border-radius:4px;background:var(--bdr);color:var(--mut)">${a.source}</span>`:''}
+        </div>
+      </div>
+      ${isEN?`
+        <div style="font-family:'Lora',serif;font-size:.82rem;line-height:1.65;color:var(--mut);margin-bottom:.5rem">${a.resume_en||''}</div>
+        ${a.resume_fr?`<div style="font-size:.8rem;line-height:1.6;color:var(--txt);padding:.5rem .75rem;background:var(--bg);border-radius:6px;border-left:2px solid ${tagColor}"><strong>🇫🇷</strong> ${a.resume_fr}</div>`:''}
+      `:
+        `<div style="font-family:'Lora',serif;font-size:.84rem;line-height:1.7;color:var(--mut);margin-bottom:${a.impact?'.5rem':'0'}">${a.resume||''}</div>
+        ${a.impact?`<div style="font-size:.78rem;line-height:1.5;color:var(--txt);padding:.45rem .7rem;background:var(--bg);border-radius:6px;margin-top:.35rem"><strong>🎓 ECT :</strong> ${a.impact}</div>`:''}
+      `}
+    </div>`;
+  }).join('');
+}
+
+function initActu(){
+  loadActu();
+}
+
 // ══════════════════════════════════════════════════
 // IMPORT FICHES (CSV/Quizlet/Anki)
 // ══════════════════════════════════════════════════
@@ -3077,37 +3368,8 @@ let calDate = new Date();
 function initCalendrier() { renderCal(); }
 function calNav(dir) { calDate.setMonth(calDate.getMonth()+dir); renderCal(); }
 function calGoToday() { calDate = new Date(); renderCal(); }
-function renderCal() {
-  const el = document.getElementById('cal-grid'); if(!el) return;
-  const year = calDate.getFullYear(), month = calDate.getMonth();
-  const lbl = document.getElementById('cal-month-lbl');
-  if(lbl) lbl.textContent = MONTHS[month].charAt(0).toUpperCase()+MONTHS[month].slice(1)+' '+year;
-  const first = new Date(year, month, 1);
-  const last  = new Date(year, month+1, 0);
-  const startDay = (first.getDay()+6)%7;
-  const days = ['L','M','M','J','V','S','D'];
-  let html = days.map(d => `<div style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-align:center;font-weight:600;color:var(--mut);padding:.4rem">${d}</div>`).join('');
-  for(let i=0;i<startDay;i++) html += '<div></div>';
-  for(let d=1;d<=last.getDate();d++) {
-    const date = new Date(year, month, d);
-    const dateStr = date.toLocaleDateString('fr-FR');
-    const isToday = dateStr === tstr();
-    const hasTasks = S.tasks.some(t => t.date===dateStr);
-    const hasDST   = S.dsts.some(x => x.date===`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
-    const hasKh    = S.kholles.some(k => k.date===`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
-    const hasRem   = S.reminders.some(r => r.date===`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
-    html += `<div style="padding:.4rem;text-align:center;border-radius:6px;cursor:pointer;background:${isToday?'var(--txt)':'transparent'};color:${isToday?'#fff':'var(--txt)'};position:relative;min-height:38px;border:1px solid ${isToday?'var(--txt)':'transparent'};transition:background .15s" onmouseover="this.style.background=this.style.background||'var(--bg)'" onmouseout="if(!${isToday})this.style.background='transparent'">
-      <div style="font-weight:${isToday?'800':'500'};font-size:.84rem">${d}</div>
-      <div style="display:flex;justify-content:center;gap:2px;margin-top:2px">
-        ${hasDST?`<div style="width:5px;height:5px;border-radius:50%;background:${MC.droit}"></div>`:''}
-        ${hasKh?`<div style="width:5px;height:5px;border-radius:50%;background:${MC.anglais}"></div>`:''}
-        ${hasRem?`<div style="width:5px;height:5px;border-radius:50%;background:#ec4899"></div>`:''}
-        ${hasTasks?`<div style="width:5px;height:5px;border-radius:50%;background:var(--management)"></div>`:''}
-      </div>
-    </div>`;
-  }
-  el.innerHTML = html;
-}
+// renderCal defined below with full features
+
 
 // ── Anki (Flashcards style Anki/AngloApp) ──
 let _ankiFilter = null;
