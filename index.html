@@ -49,7 +49,7 @@ nav{display:flex;flex-direction:column;gap:.08rem;flex:1}
 .sfv{font-weight:700;font-size:.88rem}
 
 /* ── MAIN ── */
-main{padding:2rem 2.5rem;max-width:1200px}
+main{padding:2rem 2.5rem;max-width:1000px}
 .page{display:none}
 .page.on{display:block;animation:fu .22s ease}
 @keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
@@ -305,30 +305,10 @@ main{padding:2rem 2.5rem;max-width:1200px}
   .dtabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
   .sgrid{grid-template-columns:1fr}
 }
-
-@media(max-width:480px){
-  .app{grid-template-columns:1fr}
-  main{padding:0.8rem}
-  .card{padding:0.9rem}
-  .ph-t{font-size:1.2rem}
-  .btn{padding:0.5rem 0.8rem;font-size:0.75rem}
-  .inp{padding:0.5rem 0.65rem;font-size:0.8rem}
-  aside{padding:0.8rem 0.6rem}
-  .nb{padding:0.4rem 0.5rem;font-size:0.75rem}
-}
-
 @media(max-width:420px){
   .g2{grid-template-columns:1fr}
   .irow .sel{min-width:0;width:100%}
 }
-
-.cours-viewer-section{display:none;background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:1.4rem;margin-bottom:1.1rem;animation:fu .22s ease}
-.cours-viewer-section.open{display:block}
-.cv-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;gap:1rem;flex-wrap:wrap}
-.cv-title{font-size:1.3rem;font-weight:800;line-height:1.2}
-.cv-meta{display:flex;gap:1rem;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--mut)}
-.cv-content{font-family:'Lora',serif;font-size:.9rem;line-height:1.7;color:var(--txt);margin:1rem 0;white-space:pre-wrap;word-break:break-word}
-
 </style>
 </head>
 <body>
@@ -372,7 +352,7 @@ main{padding:2rem 2.5rem;max-width:1200px}
     <button class="nb" onclick="goTo('calendrier',this)"><span class="nd" style="background:#06b6d4"></span>📅 Calendrier</button>
     <button class="nb" onclick="goTo('anki',this)"><span class="nd" style="background:#f59e0b"></span>🃏 Flashcards</button>
     <button class="nb" onclick="goTo('bienetre',this)"><span class="nd" style="background:#ec4899"></span>😴 Bien-être</button>
-    <button class="nb" onclick="goTo('actu',this);setTimeout(loadActualites,100)"><span class="nd" style="background:#ef4444"></span>📰 Actualités</button>
+    <button class="nb" onclick="goTo('actu',this)"><span class="nd" style="background:#ef4444"></span>📰 Actualités</button>
     <button class="nb settings-nb" onclick="goTo('sync',this)"><span class="nd" style="background:#0891b2"></span>☁️ Synchronisation</button>
     <button class="nb settings-nb" onclick="goTo('settings',this)"><span class="nd" style="background:#f59e0b"></span>⚙️ Paramètres</button>
   </nav>
@@ -2045,6 +2025,7 @@ function renderCours(){
 
 
 
+// ✅ FIX MINIMAL : Fonction openCoursViewer manquante
 function openCoursViewer(id){
   const c=S.cours.find(x=>x.id===id);
   if(!c)return;
@@ -2056,14 +2037,13 @@ function openCoursViewer(id){
   document.getElementById('cv-date').textContent=c.date;
   document.getElementById('cv-pages').textContent=(c.pages||1)+'p';
   document.getElementById('cv-content').textContent=c.content;
-  cv.classList.add('open');
-  window.scrollTo(0,0);
+  cv.style.display='block';
 }
 
 function closeCoursViewer(){
-  const el=document.getElementById('cours-viewer-section');
-  if(el)el.classList.remove('open');
-  S.curCours=null;
+  const el = document.getElementById('cours-viewer-section');
+  if(el) el.style.display='none';
+  S.curCours = null;
   // Reset IA output
   const out = document.getElementById('ia-output');
   if(out) out.innerHTML='';
@@ -3973,35 +3953,6 @@ self.addEventListener('push', e => {
   }, 10000);
 
 })();
-
-function loadActualites(){
-  const el=document.getElementById('actu-list');
-  if(!el)return;
-  el.innerHTML='<div style="text-align:center;color:var(--mut);padding:2rem">Chargement des actualités...</div>';
-  
-  // Utiliser une API de news économiques
-  const queries=['BCE','Fed','économie','inflation','PIB','zone euro'];
-  const query=queries[Math.floor(Math.random()*queries.length)];
-  
-  // Mock data pour démo (remplacer par vraie API)
-  const mockNews=[
-    {title:'Politique monétaire de la BCE: taux directeurs',source:'Reuters',date:'20 avril 2026'},
-    {title:'L'inflation en zone euro se stabilise',source:'Eurostat',date:'18 avril 2026'},
-    {title:'La Fed surveille l'économie américaine',source:'Bloomberg',date:'16 avril 2026'},
-    {title:'Croissance française : +0.7% au T1',source:'INSEE',date:'15 avril 2026'},
-    {title:'Chômage en zone euro à 7.2%',source:'Eurostat',date:'12 avril 2026'}
-  ];
-  
-  let html='';
-  mockNews.forEach(n=>{
-    html+='<div class="card" style="margin-bottom:.8rem;cursor:pointer" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.1)\'" onmouseout="this.style.boxShadow=\'0 2px 12px rgba(0,0,0,.06)\'">'+
-      '<div style="font-family:IBM Plex Mono,monospace;font-size:.58rem;color:var(--mut);margin-bottom:.4rem">'+n.date+'</div>'+
-      '<div style="font-weight:700;font-size:.95rem;margin-bottom:.4rem">'+n.title+'</div>'+
-      '<div style="font-family:IBM Plex Mono,monospace;font-size:.56rem;color:rgba(0,0,0,.5);padding:.2rem .5rem;background:rgba(0,0,0,.04);border-radius:3px;display:inline-block">'+n.source+'</div>'+
-    '</div>';
-  });
-  el.innerHTML=html;
-}
 
 </script>
 
