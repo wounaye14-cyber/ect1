@@ -1641,6 +1641,7 @@ function fmtDs(s){const d=new Date(s);return d.toLocaleDateString('fr-FR',{day:'
 function dayDiff(dateStr){return Math.ceil((new Date(dateStr+'T12:00')-new Date())/(864e5));}
 
 const S={
+  reminders:ld('ect-reminders',[]),
   tasks:   ld('ect-tasks',[]),
   fiches:  ld('ect-fiches',[]),
   events:  ld('ect-events',null),
@@ -2023,22 +2024,6 @@ function renderCours(){
   };
 }
 
-
-
-// ✅ FIX MINIMAL : Fonction openCoursViewer manquante
-function openCoursViewer(id){
-  const c=S.cours.find(x=>x.id===id);
-  if(!c)return;
-  S.curCours=c;
-  const cv=document.getElementById('cours-viewer-section');
-  if(!cv)return;
-  document.getElementById('cv-title').textContent=c.title;
-  document.getElementById('cv-mat').textContent=c.mat;
-  document.getElementById('cv-date').textContent=c.date;
-  document.getElementById('cv-pages').textContent=(c.pages||1)+'p';
-  document.getElementById('cv-content').textContent=c.content;
-  cv.style.display='block';
-}
 
 function closeCoursViewer(){
   const el = document.getElementById('cours-viewer-section');
@@ -3953,6 +3938,38 @@ self.addEventListener('push', e => {
   }, 10000);
 
 })();
+
+// ✅ INITIALISATION FINALE - AFFICHER LES DONNÉES
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    console.log('Initialisation...');
+    console.log('S.reminders:', S.reminders.length);
+    
+    // S'assurer que les données sont chargées
+    S.reminders = ld('ect-reminders', []);
+    S.fiches = ld('ect-fiches', []);
+    S.cours = ld('ect-cours', []);
+    
+    console.log('Données rechargées');
+    console.log('Reminders:', S.reminders.length);
+    
+    // Appeler les fonctions de rendu
+    if(typeof renderReminders === 'function') {
+      console.log('Appel renderReminders');
+      renderReminders();
+    }
+    if(typeof renderFiches === 'function') {
+      console.log('Appel renderFiches');
+      renderFiches();
+    }
+    if(typeof renderCours === 'function') {
+      console.log('Appel renderCours');
+      renderCours();
+    }
+    
+    console.log('✅ Initialisation terminée');
+  }, 300);
+});
 
 </script>
 
